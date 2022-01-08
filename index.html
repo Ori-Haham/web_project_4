@@ -1,116 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
-</head>
-
-<body class="body">
+  </head>
+  <body class="body">
     <div class="page">
-        <header class="header">
-            <img class="header__logo" alt="Around the us" src="./images/logo.svg">
-        </header>
-
-        <main class="content">
-
-          <div class="profile">
-                  <img class="profile__image" alt="profile image" src="./images/frofile-image.jpg">
-     
-              <div class="profile__info">
-                  <div class="profile__info-name-edit-button-container">
-                  <h2 class="profile__name">
-                    Jacques Cousteau
-                  </h2>
-                  <div class="profile__edit-button">
-       
-                  </div>
-                  
-
-
-                </div>   
-                  <p class="profile__about-me">
-                    Explorer
-                  </p>
-                  </div>
-                  <div class="profile__add-button">
-                    <p class="profile__add-button-sign">
-                        +
-                    </p>
-              </div>
+      <header class="header">
+        <img class="header__logo" alt="Around the us" src="./images/logo.svg">
+      </header>
+      <main class="content">
+        <div class="profile">
+          <img class="profile__image" alt="profile image" src="./images/frofile-image.jpg">
+          <div class="profile__info">
+            <div class="profile__info-name-edit-button-container">
+              <h2 class="profile__name"></h2>
+              <div class="profile__edit-button"></div>
+            </div>
+            <p class="profile__about-me"></p>
           </div>
-
-          <div class="profile-form-container">
-            <form class="frofile-form">
-                    <div class="profile-form__close-button"></div>
-            <h2 class="profile-form__heading">Edit profill</h2>
-            <fieldset class="profile-form__fieldset">
-            
-            <input class="profile-form__item profile-form__name" type="text" placeholder="name">
-            <input class="profile-form__item profile-form__about-me" type="text" placeholder="About me">
+          <div class="profile__add-button">
+            <div class="profile__add-button-sign"></div>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-1.jpg">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Yosemite Valley </p>
+              <div class="xxx cards__like-button cards__like-button_disabled"></div>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-2.png">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Lake Louise </p>
+              <div class="cards__like-button"></div>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-3.png">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Bald Mountains </p>
+              <div class="cards__like-button"></div>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-4.png">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Latemar </p>
+              <div class="cards__like-button"></div>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-7.png">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Vanoise National park </p>
+              <div class="cards__like-button"></div>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" alt="" src="./images/card-8.png">
+            <div class="cards__location-like-container">
+              <p class="cards__location"> Lago di Braies </p>
+              <div class="cards__like-button"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer">
+        <p class="footer__rights"> © 2021 Around The U.S. </p>
+      </footer>
+    </div>
+    </div>
+    <div class="profile-form-container profile-form-container_display_hidden">
+      <form class="frofile-form">
+        <div class="profile-form__close-button"></div>
+        <h2 class="profile-form__heading">Edit profill</h2>
+        <fieldset class="profile-form__fieldset">
+          <input class="profile-form__item profile-form__name" type="text" placeholder="name">
+          <input class="profile-form__item profile-form__about-me" type="text" placeholder="About me">
         </fieldset>
         <fieldset class="profile-form__fieldset">
-            <button class="profile-form__submit-button">
-                    Submit
-            </button>
+          <button class="profile-form__submit-button"> Save </button>
         </fieldset>
-    </form>
-        </div>
-
-          <div class="cards" >
-              <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-1.jpg">
-                <p class="cards__location">
-                    Yosemite Valley
-                </p>
-              </div>
-              <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-2.png">
-                <p class="cards__location">
-                    Lake Louise
-                </p>
-            </div>
-            <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-3.png">
-                <p class="cards__location">
-                    Bald Mountains
-                </p>
-            </div>
-            <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-4.png">
-                <p class="cards__location">
-                    Latemar
-                </p>
-            </div>
-            <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-7.png">
-                <p class="cards__location">
-                    Vanoise Nationa...
-                </p>
-            </div>
-            <div class="cards__card">
-                <img class="cards__image" alt="" src="./images/card-8.png">
-                <p class="cards__location">
-                    Lago di Braies
-                </p>
-            </div>
-          </div>
-
-        </main>
-
-        <footer class="footer">
-            <p class="footer__rights">
-                © 2021 Around The U.S.
-            </p>
-        </footer>
-    </div>
-    
+      </form>
     </div>
     <script src="./script.js"></script>
-</body>
-
+  </body>
 </html>

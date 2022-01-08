@@ -1,0 +1,23 @@
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media screen and (max-width: 880px) {
+  .page {
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .page {
+    width: 415px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .page {
+    width: 282px;
+  }
+}

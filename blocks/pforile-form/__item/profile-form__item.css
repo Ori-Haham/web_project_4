@@ -1,0 +1,42 @@
+.profile-form__item {
+  margin: 22px auto 0;
+  width: 358px;
+  height: 34px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+  box-sizing: border-box;
+}
+
+.profile-form__item:focus {
+  outline-color: #007ccf;
+  opacity: 0.9;
+}
+
+.profile-form__item::placeholder {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+}
+
+.profile-form__item:nth-of-type(1) {
+  margin: 40px auto 0;
+}
+
+@media screen and (max-width: 580px) {
+  .profile-form__item {
+    margin: 25px auto 0;
+    width: 238px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .profile-form__item:nth-of-type(1) {
+    margin: 70px auto 0;
+  }
+}
