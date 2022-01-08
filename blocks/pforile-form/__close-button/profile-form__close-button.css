@@ -1,6 +1,6 @@
 .profile-form__close-button {
-  padding: 7px;
-  background-image: url(./images/Close-Icon.svg);
+  padding: 20px;
+  background-image: url(../../../images/Close-Icon.svg);
   background-position: center;
   background-size: 40px 40px;
   position: absolute;
