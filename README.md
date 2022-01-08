@@ -24,4 +24,4 @@ I have also written a number of simple functions in JS which are triggered by cl
 
 The next developments I intend to make in this project are to make the add-image and Like buttons active with the help of additional knowledge in JS I intend to acquire in the near future.
 
-[Link to project on Githube]()
+[Link to project on Githube](https://ori-haham.github.io/web_project_4/)
