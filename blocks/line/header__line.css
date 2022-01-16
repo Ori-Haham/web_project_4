@@ -1,27 +1,30 @@
-.header {
-  padding-top: 45px;
-  padding-bottom: 41px;
-  display: block;
-  width: 880px;
+.line {
+  height: 1px;
+  background-color: rgb(84, 84, 84);
+  max-width: 880px;
   margin: 0 auto;
 }
 
 @media screen and (max-width: 880px) {
-  .header {
+  .line {
     max-width: 581px;
   }
 }
 
 @media screen and (max-width: 580px) {
-  .header {
+  .line {
     width: 415px;
   }
 }
 
 @media screen and (max-width: 440px) {
-  .header {
-    padding-top: 28px;
-    padding-bottom: 32px;
+  .line {
     width: 282px;
   }
 }
+@media screen and (max-width: 320px) {
+  .line {
+    width: 320px;
+  }
+}
+

@@ -1,5 +1,6 @@
-.cards__location {
-  width: 222px;
+.card__location {
+  max-width: 222px;
+  width: 100%;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;

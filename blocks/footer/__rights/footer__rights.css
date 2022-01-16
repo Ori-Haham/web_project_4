@@ -2,16 +2,17 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  color: white;
+  color: rgba(84, 84, 84, 1);
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 @media screen and (max-width: 580px) {
   .footer__rights {
     font-size: 14px;
     line-height: 17px;
-    width: 282px;
+    max-width: 282px;
     margin: 0 auto;
   }
 }

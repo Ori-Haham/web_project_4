@@ -1,0 +1,15 @@
+.card__like-button {
+  width: 21px;
+  height: 19px;
+  cursor: pointer;
+  background-image: url(../../../images/heart.svg);
+  background-position: center;
+  background-size: cover;
+  margin: 30px 0 0 3px;
+  transition: background-image 0.6s linear 0.1s;
+}
+
+.card__like-button:hover {
+  background-image: url(../../../images/heart-hover.svg);
+  transition: background-image 0.6s linear 0.1s;
+}

@@ -2,13 +2,13 @@
   width: 24px;
   height: 24px;
   color: white;
-  font-size: 10px;
   margin: 15px 0 0 18px;
   padding: 0;
-  background-image: url(../../../images/Vector-1.png);
+  background-image: url(../../../images/edit.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 10px;
+  background-color: black;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   cursor: pointer;
@@ -18,14 +18,14 @@
 
 .profile__edit-button:hover {
   opacity: 0.6;
-  transition: opacity 0.6s linear 0.1s;
 }
 
 @media screen and (max-width: 440px) {
   .profile__edit-button {
     width: 18px;
-    height: 18px;
-    margin: 4px 0 0 10px;
-    background-size: 7.5px;
+    height: 16px;
+    margin: 0 0 5px 10px;
+    background-size: 7.5px 7.5px;
+    align-self: flex-end;
   }
 }

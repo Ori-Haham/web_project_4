@@ -1,27 +1,29 @@
-let profileForm = document.querySelector('.profile-form-container');
-let profileEditButton = document.querySelector('.profile__edit-button');
-let formCloseButton = document.querySelector('.profile-form__close-button');
-let pageOverlay = document.querySelector('.page');
-let profileName = document.querySelector('.profile__name').textContent = `Jacques Cousteau`;
-let profileAbout = document.querySelector('.profile__about-me').textContent =`Explorer`;
-let aboutMe = document.querySelector('.profile-form__about-me').value = `Explorer`;
-let editName = document.querySelector('.profile-form__name').value = `Jacques Cousteau`;
+let popup = document.querySelector(".popup");
+let editButton = document.querySelector(".profile__edit-button");
+let popupClose = document.querySelector(".profile-form__close-button");
+let profileName = document.querySelector(".profile__name");
+let profileAbout = document.querySelector(".profile__about-me");
+let editName = document.querySelector(".profile-form__name");
+let editAboutMe = document.querySelector(".profile-form__about-me");
+let form = document.querySelector(".frofile-form");
 
-function popupForm() {
-  profileForm.classList.toggle('profile-form-container_display_hidden');
-  pageOverlay.classList.toggle('overlay');
-};
+function openPopup() {
+  popup.classList.remove("popup_hidden");
+  editName.value = profileName.textContent;
+  editAboutMe.value = profileAbout.textContent;
+}
 
-profileEditButton.addEventListener('click', popupForm);
-formCloseButton.addEventListener('click', popupForm);
+function clocePopup() {
+  popup.classList.add("popup_hidden");
+}
 
 function editProfile(event) {
-    let aboutMe = document.querySelector('.profile-form__about-me').value;
-    let editName = document.querySelector('.profile-form__name').value;
-    document.querySelector('.profile__name').innerHTML = editName;
-    document.querySelector('.profile__about-me').innerHTML = aboutMe;
-    popupForm()
-    event.preventDefault()
-};
-let formSubmit = document.querySelector('.profile-form__submit-button');
-formSubmit.addEventListener('click', editProfile);
+  event.preventDefault();
+  profileName.textContent = editName.value;
+  profileAbout.textContent = editAboutMe.value;
+  clocePopup();
+}
+
+editButton.addEventListener("click", openPopup);
+popupClose.addEventListener("click", clocePopup);
+form.addEventListener("submit", editProfile);

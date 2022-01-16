@@ -2,16 +2,27 @@
   display: flex;
   flex-wrap: wrap;
   padding-top: 46px;
+  gap: 20px 17px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 880px) {
+  .cards {
+    max-width: 581px;
+  }
 }
 
 @media screen and (max-width: 580px) {
   .cards {
     justify-content: center;
+    width: 415px;
   }
 }
 
 @media screen and (max-width: 440px) {
   .cards {
     padding-top: 36px;
+    width: 282px;
   }
 }

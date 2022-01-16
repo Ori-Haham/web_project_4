@@ -3,13 +3,18 @@
   background-image: url(../../../images/Close-Icon.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 40px 40px;
+  background-size: 32px 32px;
   position: absolute;
   right: -40px;
   top: -40px;
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.6s linear 0.1s;
+  border: violet 1px solid;
+}
+
+.profile-form__close-button::before {
+  transform: rotate(45deg);
 }
 
 .profile-form__close-button:hover {

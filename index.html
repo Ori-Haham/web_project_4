@@ -1,95 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
-    <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Around-The-U.S</title>
   </head>
   <body class="body">
-    <div class="page">
       <header class="header">
-        <img class="header__logo" alt="Around the us" src="./images/logo.svg">
+        <img class="header__logo" alt="Around the us" src="./images/logo.svg" />
       </header>
       <main class="content">
-        <div class="profile">
-          <img class="profile__image" alt="profile image" src="./images/frofile-image.jpg">
+        <div class="line"></div>
+        <section class="profile">
+          <img
+            class="profile__image"
+            alt="profile image"
+            src="./images/frofile-image.jpg"
+          />
           <div class="profile__info">
             <div class="profile__info-name-edit-button-container">
-              <h2 class="profile__name"></h2>
-              <div class="profile__edit-button"></div>
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <button class="profile__edit-button" type="button"></button>
             </div>
-            <p class="profile__about-me"></p>
+            <p class="profile__about-me">Explorer</p>
           </div>
-          <div class="profile__add-button">
+          <button class="profile__add-button" type="button">
             <div class="profile__add-button-sign"></div>
-          </div>
-        </div>
-        <div class="cards">
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-1.jpg">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Yosemite Valley </p>
-              <div class="xxx cards__like-button cards__like-button_disabled"></div>
+          </button>
+        </section>
+        <section class="cards">
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-1.jpg" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Yosemite Valley</h2>
+              <div class="card__like-button card__like-button_disabled"></div>
             </div>
-          </div>
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-2.png">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Lake Louise </p>
-              <div class="cards__like-button"></div>
+          </article>
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-2.png" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Lake Louise</h2>
+              <div class="card__like-button"></div>
             </div>
-          </div>
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-3.png">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Bald Mountains </p>
-              <div class="cards__like-button"></div>
+          </article>
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-3.png" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Bald Mountains</h2>
+              <div class="card__like-button"></div>
             </div>
-          </div>
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-4.png">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Latemar </p>
-              <div class="cards__like-button"></div>
+          </article>
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-4.png" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Latemar</h2>
+              <div class="card__like-button"></div>
             </div>
-          </div>
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-7.png">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Vanoise National park </p>
-              <div class="cards__like-button"></div>
+          </article>
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-7.png" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Vanoise National park</h2>
+              <div class="card__like-button"></div>
             </div>
-          </div>
-          <div class="cards__card">
-            <img class="cards__image" alt="" src="./images/card-8.png">
-            <div class="cards__location-like-container">
-              <p class="cards__location"> Lago di Braies </p>
-              <div class="cards__like-button"></div>
+          </article>
+          <article class="card">
+            <img class="card__image" alt="" src="./images/card-8.png" />
+            <div class="card__location-like-container">
+              <h2 class="card__location">Lago di Braies</h2>
+              <div class="card__like-button"></div>
             </div>
-          </div>
-        </div>
+          </article>
+        </section>
       </main>
       <footer class="footer">
-        <p class="footer__rights"> © 2021 Around The U.S. </p>
+        <p class="footer__rights">© 2021 Around The U.S.</p>
       </footer>
     </div>
-    </div>
-    <div class="profile-form-container profile-form-container_display_hidden">
+    <div class="popup popup_hidden">
+    <div class="profile-form-container">
       <form class="frofile-form">
         <div class="profile-form__close-button"></div>
-        <h2 class="profile-form__heading">Edit profill</h2>
+        <h2 class="profile-form__heading">Edit profile</h2>
         <fieldset class="profile-form__fieldset">
-          <input class="profile-form__item profile-form__name" type="text" placeholder="name">
-          <input class="profile-form__item profile-form__about-me" type="text" placeholder="About me">
-        </fieldset>
-        <fieldset class="profile-form__fieldset">
-          <button class="profile-form__submit-button"> Save </button>
+          <input
+            class="profile-form__item profile-form__name"
+            name="Name"
+            type="text"
+            placeholder="name"
+          />
+          <input
+            class="profile-form__item profile-form__about-me"
+            name="About-me"
+            type="text"
+            placeholder="About me"
+          />
+          <button class="profile-form__submit-button" type="submit" value="Submit">Save</button>
         </fieldset>
       </form>
     </div>
+  </div>
     <script src="./script.js"></script>
   </body>
 </html>

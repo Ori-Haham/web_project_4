@@ -1,5 +1,5 @@
 .profile-form__submit-button {
-  margin: 48px auto 0;
+  margin: 48px auto 36.5px;
   padding: 0;
   background-color: black;
   color: white;
@@ -25,7 +25,9 @@
   .profile-form__submit-button {
     width: 238px;
     height: 46px;
-    margin: 46px auto 0;
+    margin: 46px auto 36.5px;
     padding: 0;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

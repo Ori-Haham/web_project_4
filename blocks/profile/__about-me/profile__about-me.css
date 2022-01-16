@@ -5,11 +5,19 @@
   color: #ffffff;
   margin: 16px 0 0 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 580px) {
+  .profile__about-me {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 440px) {
   .profile__about-me {
-    font-weight: normal;
     font-size: 14px;
     line-height: 17px;
     text-align: center;

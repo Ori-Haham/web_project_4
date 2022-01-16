@@ -1,20 +1,21 @@
 .profile-form-container {
   width: 430px;
-  height: 330px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 1;
   border-radius: 10px;
   border: solid 1px white;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 195px;
   transform: translate(-50%, 0);
-  z-index: 2;
+  z-index: 1;
+  justify-self: center;
+  align-self: center;
 }
 
 @media screen and (max-width: 580px) {
   .profile-form-container {
     width: 282px;
-    height: 322px;
   }
 }
