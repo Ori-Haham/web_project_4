@@ -5,13 +5,9 @@
   border-radius: 10px;
   border: solid 1px white;
   box-sizing: border-box;
-  position: fixed;
-  left: 50%;
-  top: 195px;
-  transform: translate(-50%, 0);
   z-index: 1;
-  justify-self: center;
   align-self: center;
+  position: relative;
 }
 
 @media screen and (max-width: 580px) {
