@@ -5,7 +5,9 @@
   background-image: url(../../../images/heart.svg);
   background-position: center;
   background-size: cover;
+  background-color: white;
   margin: 30px 0 0 3px;
+  border: 0;
   transition: background-image 0.6s linear 0.1s;
 }
 

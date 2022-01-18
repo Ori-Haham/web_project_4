@@ -5,7 +5,8 @@ let profileName = document.querySelector(".profile__name");
 let profileAbout = document.querySelector(".profile__about-me");
 let editName = document.querySelector(".profile-form__name");
 let editAboutMe = document.querySelector(".profile-form__about-me");
-let form = document.querySelector(".frofile-form");
+let submitProfile = document.querySelector(".profile-form__submit-button");
+let form = document.querySelector(".profile-form");
 
 function openPopup() {
   popup.classList.remove("popup_hidden");
