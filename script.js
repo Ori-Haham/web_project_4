@@ -1,12 +1,12 @@
 let popup = document.querySelector(".popup");
-let editButton = document.querySelector(".profile__edit-button");
+let form = document.querySelector(".profile-form");
 let popupClose = document.querySelector(".profile-form__close-button");
 let profileName = document.querySelector(".profile__name");
 let profileAbout = document.querySelector(".profile__about-me");
-let editName = document.querySelector(".profile-form__name");
-let editAboutMe = document.querySelector(".profile-form__about-me");
-let submitProfile = document.querySelector(".profile-form__submit-button");
-let form = document.querySelector(".profile-form");
+let editButton = document.querySelector(".profile__edit-button");
+let editName = form.querySelector(".profile-form__name");
+let editAboutMe = form.querySelector(".profile-form__about-me");
+let submitProfile = form.querySelector(".profile-form__submit-button");
 
 function openPopup() {
   popup.classList.remove("popup_hidden");

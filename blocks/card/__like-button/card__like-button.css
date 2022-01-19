@@ -8,10 +8,10 @@
   background-color: white;
   margin: 30px 0 0 3px;
   border: 0;
-  transition: background-image 0.6s linear 0.1s;
+  opacity: 1;
+  transition: opacity 0.6s linear 0.1s;
 }
 
 .card__like-button:hover {
-  background-image: url(../../../images/heart-hover.svg);
-  transition: background-image 0.6s linear 0.1s;
+  opacity: 0.5;
 }
