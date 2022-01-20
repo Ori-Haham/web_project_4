@@ -2,7 +2,8 @@
   padding-top: 45px;
   padding-bottom: 41px;
   display: block;
-  width: 880px;
+  max-width: 880px;
+  width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
@@ -15,7 +16,7 @@
 
 @media screen and (max-width: 580px) {
   .header {
-    width: 415px;
+    max-width: 415px;
   }
 }
 
@@ -23,12 +24,12 @@
   .header {
     padding-top: 28px;
     padding-bottom: 32px;
-    width: 282px;
+    max-width: 282px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .header {
-    width: 320px;
+    max-width: 320px;
   }
 }
