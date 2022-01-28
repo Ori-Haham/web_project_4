@@ -29,50 +29,7 @@
           <span class="profile__add-button-sign"></span>
         </button>
       </section>
-      <section class="cards">
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-1.jpg" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Yosemite Valley</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-2.png" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Lake Louise</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-3.png" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Bald Mountains</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-4.png" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Latemar</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-7.png" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Vanoise National park</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" alt="" src="./images/card-8.png" />
-          <div class="card__location-like-container">
-            <h2 class="card__location">Lago di Braies</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </article>
-      </section>
+      <section class="cards"></section>
     </main>
     <footer class="footer">
       <p class="footer__rights">© 2021 Around The U.S.</p>
@@ -106,6 +63,15 @@
         </form>
       </div>
     </div>
+    <template id="card-template">
+      <article class="card">
+        <img class="card__image" alt="" src="" />
+        <div class="card__location-like-container">
+          <h2 class="card__location"></h2>
+          <button class="card__like-button" type="button"></button>
+        </div>
+      </article>
+    </template>
     <script src="./script.js"></script>
   </body>
 </html>
