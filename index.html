@@ -35,22 +35,20 @@
       <p class="footer__rights">© 2021 Around The U.S.</p>
     </footer>
     <div class="popup popup_hidden">
-      <div class="profile-form-container">
+      <div class="popup-container">
         <button class="popup__close-button" type="button"></button>
         <form class="profile-form" name="profile-form">
-          <h2 class="profile-form__heading">Edit profile</h2>
+          <h2 class="profile-form__heading"></h2>
           <fieldset class="profile-form__fieldset">
             <input
               class="profile-form__item profile-form__name"
               name="Name"
               type="text"
-              placeholder="name"
             />
             <input
               class="profile-form__item profile-form__about-me"
               name="About-me"
               type="text"
-              placeholder="About me"
             />
             <button
               class="profile-form__submit-button"
@@ -63,9 +61,26 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_card popup_hidden">
+      <div class="popup-container">
+        <button
+          class="popup__close-button popup__close-button_card"
+          type="button"
+        ></button>
+        <img class="popup__image" />
+        <h4 class="popup__location"></h4>
+      </div>
+    </div>
     <template id="card-template">
       <article class="card">
-        <img class="card__image" alt="" src="" />
+        <button class="card__open-popup" type="button">
+          <img class="card__image" src="" />
+        </button>
+        <img
+          class="card__remove-button"
+          alt="Trash can"
+          src="./images/remove-card.svg"
+        />
         <div class="card__location-like-container">
           <h2 class="card__location"></h2>
           <button class="card__like-button" type="button"></button>
