@@ -34,21 +34,25 @@
     <footer class="footer">
       <p class="footer__rights">© 2021 Around The U.S.</p>
     </footer>
-    <div class="popup popup_hidden">
-      <div class="popup-container">
-        <button class="popup__close-button" type="button"></button>
+    <div class="profile-popup popup-hidden">
+      <div class="profile-popup__container">
+        <button class="profile-popup__close-button" type="button"></button>
         <form class="profile-form" name="profile-form">
-          <h2 class="profile-form__heading"></h2>
+          <h2 class="profile-form__heading">Edit profile</h2>
           <fieldset class="profile-form__fieldset">
             <input
               class="profile-form__item profile-form__name"
               name="Name"
               type="text"
+              placeholder="Name"
+              required
             />
             <input
               class="profile-form__item profile-form__about-me"
               name="About-me"
               type="text"
+              placeholder="About me"
+              required
             />
             <button
               class="profile-form__submit-button"
@@ -61,14 +65,44 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_card popup_hidden">
-      <div class="popup-container">
+    <div class="card-popup popup-hidden">
+      <div class="card-popup__container">
+        <button class="card-popup__close-button" type="button"></button>
+        <form class="card-form" name="card-form">
+          <h2 class="card-form__heading">New Place</h2>
+          <fieldset class="card-form__fieldset">
+            <input
+              class="card-form__item card-form__place"
+              name="Name"
+              type="text"
+              placeholder="Title"
+            />
+            <input
+              class="card-form__item card-form__url"
+              name="About-me"
+              type="text"
+              placeholder="Image URL"
+              required
+            />
+            <button
+              class="card-form__submit-button"
+              type="submit"
+              value="Submit"
+            >
+              Save
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="image-popup popup-hidden">
+      <div class="image-popup__container">
         <button
-          class="popup__close-button popup__close-button_card"
+          class="image-popup__close-button popup__close-button_card"
           type="button"
         ></button>
-        <img class="popup__image" />
-        <h4 class="popup__location"></h4>
+        <img class="image-popup__image" />
+        <h4 class="image-popup__location"></h4>
       </div>
     </div>
     <template id="card-template">
