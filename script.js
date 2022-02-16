@@ -140,3 +140,15 @@ cardPopup.addEventListener("submit", (evt) => {
   closePopup(cardPopup);
   cardForm.reset();
 });
+
+cardPopup.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("card-popup")) {
+    closePopup(evt.target);
+  }
+});
+
+profilePopup.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("profile-popup")) {
+    closePopup(evt.target);
+  }
+});

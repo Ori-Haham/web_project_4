@@ -34,28 +34,36 @@
     <footer class="footer">
       <p class="footer__rights">© 2021 Around The U.S.</p>
     </footer>
-    <div class="profile-popup popup-hidden">
+    <div class="popup profile-popup popup-hidden">
       <div class="profile-popup__container">
         <button class="profile-popup__close-button" type="button"></button>
-        <form class="profile-form" name="profile-form">
+        <form class="popup__form profile-form" name="profile-form" novalidate>
           <h2 class="profile-form__heading">Edit profile</h2>
-          <fieldset class="profile-form__fieldset">
+          <fieldset class="profile-form__fieldset popup__fieldset">
             <input
-              class="profile-form__item profile-form__name"
+              id="name-input"
+              class="popup__input profile-form__item profile-form__name"
               name="Name"
               type="text"
               placeholder="Name"
+              minlength="2"
+              maxlength="40"
               required
             />
+            <span class="name-input-error form__input-error"></span>
             <input
-              class="profile-form__item profile-form__about-me"
+              id="about-me-input"
+              class="popup__input profile-form__item profile-form__about-me"
               name="About-me"
               type="text"
               placeholder="About me"
+              minlength="2"
+              maxlength="200"
               required
             />
+            <span class="about-me-input-error form__input-error"></span>
             <button
-              class="profile-form__submit-button"
+              class="popup__button profile-form__submit-button"
               type="submit"
               value="Submit"
             >
@@ -65,27 +73,34 @@
         </form>
       </div>
     </div>
-    <div class="card-popup popup-hidden">
+    <div class="popup card-popup popup-hidden">
       <div class="card-popup__container">
         <button class="card-popup__close-button" type="button"></button>
-        <form class="card-form" name="card-form">
+        <form class="popup__form card-form" name="card-form" novalidate>
           <h2 class="card-form__heading">New Place</h2>
-          <fieldset class="card-form__fieldset">
+          <fieldset class="card-form__fieldset popup__fieldset">
             <input
-              class="card-form__item card-form__place"
+              id="place-input"
+              class="popup__input card-form__item card-form__place"
               name="Name"
               type="text"
               placeholder="Title"
+              minlength="2"
+              maxlength="30"
+              required
             />
+            <span class="place-input-error form__input-error"></span>
             <input
-              class="card-form__item card-form__url"
+              id="url-input"
+              class="popup__input card-form__item card-form__url"
               name="About-me"
-              type="text"
+              type="url"
               placeholder="Image URL"
               required
             />
+            <span class="url-input-error form__input-error"></span>
             <button
-              class="card-form__submit-button"
+              class="popup__button card-form__submit-button"
               type="submit"
               value="Submit"
             >
@@ -119,5 +134,6 @@
       </article>
     </template>
     <script src="./script.js"></script>
+    <script src="./validate.js"></script>
   </body>
 </html>
