@@ -1,5 +1,9 @@
+import { resetValidation } from "./validate.js";
+import { resetCardProfileVlidation } from "./validate.js";
+
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
+
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about-me");
 
@@ -33,59 +37,46 @@ const imagePopupCloseButton = imagePopup.querySelector(
 );
 const imagepPopupImage = imagePopup.querySelector(".image-popup__image");
 const imagePopupLocation = imagePopup.querySelector(".image-popup__location");
-const cardTemplate = document.querySelector("#card-template").content;
 
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
+const cardTemplate = document.querySelector("#card-template").content;
 
 function openPopup(popup) {
   popup.classList.remove("popup-hidden");
+  window.addEventListener("keydown", popupCloseByEscape);
 }
 
 function closePopup(popup) {
   popup.classList.add("popup-hidden");
+  window.removeEventListener("keydown", popupCloseByEscape);
 }
 
 function closePopupTarget(evt) {
-  const popupList = Array.from(document.querySelectorAll(".popup"));
-  popupList.forEach(() => {
-    if (evt.target.classList.contains("popup")) {
-      closePopup(evt.target);
-    }
-  });
+  if (evt.target.classList.contains("popup")) {
+    closePopup(evt.target);
+  }
 }
 
 function popupCloseByEscape(evt) {
   const popupList = Array.from(document.querySelectorAll(".popup"));
   popupList.forEach((element) => {
     if (evt.key === "Escape") {
-      element.classList.add("popup-hidden");
+      closePopup(element);
     }
   });
+}
+
+function openProfilePopup() {
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileAbout.textContent;
+  resetValidation(profileForm, submitProfileButton);
+  openPopup(profilePopup);
+}
+
+function openPopupImage(place, url) {
+  openPopup(imagePopup);
+  imagepPopupImage.src = url;
+  imagepPopupImage.alt = place;
+  imagePopupLocation.textContent = place;
 }
 
 function editProfile() {
@@ -93,18 +84,22 @@ function editProfile() {
   profileAbout.textContent = aboutInput.value;
 }
 
+function createNewCard(evt) {
+  evt.preventDefault();
+  cardsContainer.prepend(createCard(placeInput.value, urlInput.value));
+  closePopup(cardPopup);
+  cardForm.reset();
+}
+
 function createCard(place, url) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement
     .querySelector(".card__open-popup")
     .addEventListener("click", () => {
-      openPopup(imagePopup);
-      imagepPopupImage.setAttribute("src", url);
-      imagepPopupImage.setAttribute("alt", url);
-      imagePopupLocation.textContent = place;
+      openPopupImage(place, url);
     });
-  cardElement.querySelector(".card__image").setAttribute("src", url);
-  cardElement.querySelector(".card__image").setAttribute("alt", place);
+  cardElement.querySelector(".card__image").src = url;
+  cardElement.querySelector(".card__image").alt = place;
   cardElement
     .querySelector(".card__remove-button")
     .addEventListener("click", function () {
@@ -124,23 +119,19 @@ initialCards.forEach((card) => {
   cardsContainer.append(createCard(card.name, card.link));
 });
 
-profilePopupOpenButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
-  submitProfileButton.classList.remove("popup__button_disabled");
-  submitProfileButton.disabled = false;
-  openPopup(profilePopup);
-});
+profilePopupOpenButton.addEventListener("click", openProfilePopup);
 
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(profilePopup);
 });
 
 cardPopupOpenButton.addEventListener("click", () => {
+  resetCardProfileVlidation(cardPopup, submitCardButton);
   openPopup(cardPopup);
 });
 
 cardPopupCloseButton.addEventListener("click", () => {
+  resetValidation(cardForm, submitCardButton);
   closePopup(cardPopup);
 });
 
@@ -154,12 +145,7 @@ profileForm.addEventListener("submit", (evt) => {
   closePopup(profilePopup);
 });
 
-cardPopup.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  cardsContainer.prepend(createCard(placeInput.value, urlInput.value));
-  closePopup(cardPopup);
-  cardForm.reset();
-});
+cardPopup.addEventListener("submit", createNewCard);
 
 window.addEventListener("click", closePopupTarget);
 

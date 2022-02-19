@@ -1,33 +1,24 @@
-const popupObject = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
-
-const showInputError = (formElement, inputElement, errorMessage) => {
+function showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("popup__input_type_error");
   errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__input-error_active");
-};
+}
 
-const hideInputError = (formElement, inputElement) => {
+function hideInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("popup__input_type_error");
-  errorElement.classList.remove("fpopup__input-error_active");
+  errorElement.classList.remove("popup__input-error_active");
   errorElement.textContent = "";
-};
+}
 
-const checkInputValidity = (formElement, inputElement) => {
+function checkInputValidity(formElement, inputElement) {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
   }
-};
+}
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
@@ -70,4 +61,20 @@ function enableValidation(obj) {
     });
   });
 }
-enableValidation(popupObject);
+enableValidation(formValidationObject);
+
+export function resetValidation(formElement, buttonElement) {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
+
+  inputList.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+    toggleButtonState(inputList, buttonElement);
+  });
+}
+
+export function resetCardProfileVlidation(formElement, buttonElement) {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
+  inputList.forEach((inputElement) => {
+    toggleButtonState(inputList, buttonElement);
+  });
+}
