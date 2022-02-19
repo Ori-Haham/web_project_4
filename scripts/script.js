@@ -148,5 +148,3 @@ profileForm.addEventListener("submit", (evt) => {
 cardPopup.addEventListener("submit", createNewCard);
 
 window.addEventListener("click", closePopupTarget);
-
-window.addEventListener("keydown", popupCloseByEscape);
