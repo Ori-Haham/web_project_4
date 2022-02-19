@@ -63,7 +63,7 @@ function enableValidation(obj) {
 }
 enableValidation(formValidationObject);
 
-export function resetValidation(formElement, buttonElement) {
+export function resetProfilePopupValidation(formElement, buttonElement) {
   const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
 
   inputList.forEach((inputElement) => {
