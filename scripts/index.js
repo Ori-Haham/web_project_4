@@ -1,5 +1,4 @@
-import { resetProfilePopupValidation } from "./validate.js";
-import { resetCardProfileVlidation } from "./validate.js";
+import { resetPopupValidation, checkInputValidity } from "./validate.js";
 
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -43,11 +42,13 @@ const cardTemplate = document.querySelector("#card-template").content;
 function openPopup(popup) {
   popup.classList.remove("popup-hidden");
   window.addEventListener("keydown", popupCloseByEscape);
+  window.addEventListener("mousedown", closePopupTarget);
 }
 
 function closePopup(popup) {
   popup.classList.add("popup-hidden");
   window.removeEventListener("keydown", popupCloseByEscape);
+  window.removeEventListener("mousedown", closePopupTarget);
 }
 
 function closePopupTarget(evt) {
@@ -58,17 +59,19 @@ function closePopupTarget(evt) {
 
 function popupCloseByEscape(evt) {
   const popupList = Array.from(document.querySelectorAll(".popup"));
-  popupList.forEach((element) => {
-    if (evt.key === "Escape") {
+  if (evt.key === "Escape") {
+    popupList.forEach((element) => {
       closePopup(element);
-    }
-  });
+    });
+  }
 }
 
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  resetProfilePopupValidation(profileForm, submitProfileButton);
+  resetPopupValidation(profileForm, submitProfileButton);
+  checkInputValidity(profileForm, nameInput);
+  checkInputValidity(profileForm, aboutInput);
   openPopup(profilePopup);
 }
 
@@ -93,11 +96,9 @@ function createNewCard(evt) {
 
 function createCard(place, url) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  cardElement
-    .querySelector(".card__open-popup")
-    .addEventListener("click", () => {
-      openPopupImage(place, url);
-    });
+  cardElement.querySelector(".card__image").addEventListener("click", () => {
+    openPopupImage(place, url);
+  });
   cardElement.querySelector(".card__image").src = url;
   cardElement.querySelector(".card__image").alt = place;
   cardElement
@@ -121,6 +122,10 @@ initialCards.forEach((card) => {
 
 profilePopupOpenButton.addEventListener("click", openProfilePopup);
 
+profilePopup.addEventListener("mousedown", (evt) => {
+  closePopup(evt);
+});
+
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(profilePopup);
 });
@@ -132,12 +137,11 @@ profileForm.addEventListener("submit", (evt) => {
 });
 
 cardPopupOpenButton.addEventListener("click", () => {
-  resetCardProfileVlidation(cardPopup, submitCardButton);
+  resetPopupValidation(cardPopup, submitCardButton);
   openPopup(cardPopup);
 });
 
 cardPopupCloseButton.addEventListener("click", () => {
-  resetValidation(cardForm, submitCardButton);
   closePopup(cardPopup);
 });
 
@@ -146,5 +150,3 @@ cardPopup.addEventListener("submit", createNewCard);
 imagePopupCloseButton.addEventListener("click", () => {
   closePopup(imagePopup);
 });
-
-window.addEventListener("click", closePopupTarget);

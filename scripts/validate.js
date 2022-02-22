@@ -63,18 +63,12 @@ function enableValidation(obj) {
 }
 enableValidation(formValidationObject);
 
-export function resetProfilePopupValidation(formElement, buttonElement) {
+export function resetPopupValidation(formElement, buttonElement) {
   const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
 
-  inputList.forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement);
+  inputList.forEach(() => {
     toggleButtonState(inputList, buttonElement);
   });
 }
 
-export function resetCardProfileVlidation(formElement, buttonElement) {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-  inputList.forEach((inputElement) => {
-    toggleButtonState(inputList, buttonElement);
-  });
-}
+export { checkInputValidity };
