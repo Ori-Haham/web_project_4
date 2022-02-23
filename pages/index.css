@@ -18,7 +18,6 @@
 
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
-@import url(../blocks/card/__open-popup/card__open-popup.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__card__remove-button/card__card__remove-button.css);
 @import url(../blocks/card/__location-like-container/card__location-like-container.css);

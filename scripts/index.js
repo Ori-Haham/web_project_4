@@ -122,10 +122,6 @@ initialCards.forEach((card) => {
 
 profilePopupOpenButton.addEventListener("click", openProfilePopup);
 
-profilePopup.addEventListener("mousedown", (evt) => {
-  closePopup(evt);
-});
-
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(profilePopup);
 });
