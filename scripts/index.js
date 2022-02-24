@@ -1,4 +1,4 @@
-import { resetPopupValidation, checkInputValidity } from "./validate.js";
+import { resetPopupValidation } from "./validate.js";
 
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -70,8 +70,6 @@ function openProfilePopup() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   resetPopupValidation(profileForm, submitProfileButton);
-  checkInputValidity(profileForm, nameInput);
-  checkInputValidity(profileForm, aboutInput);
   openPopup(profilePopup);
 }
 
@@ -91,7 +89,7 @@ function createNewCard(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createCard(placeInput.value, urlInput.value));
   closePopup(cardPopup);
-  cardForm.reset();
+  resetPopupValidation();
 }
 
 function createCard(place, url) {
