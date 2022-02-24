@@ -70,5 +70,3 @@ export function resetPopupValidation(formElement, buttonElement) {
     checkInputValidity(formElement, inputElement);
   });
 }
-
-export { checkInputValidity };
