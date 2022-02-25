@@ -1,4 +1,4 @@
-import { resetPopupValidation } from "./validate.js";
+import { resetFormValiadtion } from "./validate.js";
 
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
@@ -69,7 +69,7 @@ function popupCloseByEscape(evt) {
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  resetPopupValidation(profileForm, submitProfileButton);
+  resetFormValiadtion(profileForm, submitProfileButton);
   openPopup(profilePopup);
 }
 
@@ -89,7 +89,6 @@ function createNewCard(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createCard(placeInput.value, urlInput.value));
   closePopup(cardPopup);
-  resetPopupValidation();
 }
 
 function createCard(place, url) {
@@ -131,7 +130,8 @@ profileForm.addEventListener("submit", (evt) => {
 });
 
 cardPopupOpenButton.addEventListener("click", () => {
-  resetPopupValidation(cardPopup, submitCardButton);
+  cardForm.reset();
+  resetFormValiadtion(cardForm, submitCardButton);
   openPopup(cardPopup);
 });
 

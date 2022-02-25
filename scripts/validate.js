@@ -63,10 +63,10 @@ function enableValidation(obj) {
 }
 enableValidation(formValidationObject);
 
-export function resetPopupValidation(formElement, buttonElement) {
+export function resetFormValiadtion(formElement, buttonElement) {
   const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement);
+    hideInputError(formElement, inputElement);
   });
 }
