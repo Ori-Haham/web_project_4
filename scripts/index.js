@@ -28,7 +28,6 @@ const submitProfileButton = profileForm.querySelector(
 );
 
 const cardForm = document.querySelector(".card-form");
-const submitCardButton = cardForm.querySelector(".card-form__submit-button");
 
 const cardsContainer = document.querySelector(".cards");
 
