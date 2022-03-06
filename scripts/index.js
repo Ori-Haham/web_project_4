@@ -37,37 +37,20 @@ const imagePopupCloseButton = imagePopup.querySelector(
   ".image-popup__close-button"
 );
 
-function resetProfileValidation(formElement) {
-  const inputErrorList = Array.from(
-    formElement.querySelectorAll(".input-error")
-  );
-  const inputListe = Array.from(formElement.querySelectorAll(".popup__input"));
-  inputErrorList.forEach((errorElement) => {
-    errorElement.classList.remove("popup__input-error_active");
-    errorElement.textContent = "";
-  });
-  inputListe.forEach((inputElement) => {
-    inputElement.classList.remove("popup__input_type_error");
-  });
-}
-
 function openProfilePopup() {
-  resetProfileValidation(profileForm);
-  submitProfileButton.disabled = false;
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
+  profileFormValidator.resetValidation();
   openPopup(profilePopup);
 }
 
 function openCardPopup() {
   cardForm.reset();
-  resetProfileValidation(cardForm);
-  submitCardButton.disabled = true;
-  submitCardButton.classList.add("popup__button_disabled");
+  cardFormValidator.resetValidation();
   openPopup(cardPopup);
 }
 
-function editProfile() {
+function fillProfile() {
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
 }
@@ -80,7 +63,6 @@ function createCard(cardData) {
 
 function submitNewCard(evt) {
   evt.preventDefault();
-  const cardForm = document.querySelector(".card-form");
   const placeInput = cardForm.querySelector(".card-form__place");
   const urlInput = cardForm.querySelector(".card-form__url");
   const newCardData = {
@@ -99,7 +81,7 @@ profilePopupCloseButton.addEventListener("click", () => {
 
 profileForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  editProfile();
+  fillProfile();
   closePopup(profilePopup);
 });
 
@@ -111,9 +93,7 @@ cardPopupCloseButton.addEventListener("click", () => {
 
 cardPopup.addEventListener("submit", submitNewCard);
 
-initialCards.forEach((item) => {
-  createCard(item);
-});
+initialCards.forEach(createCard);
 
 imagePopupCloseButton.addEventListener("click", () => {
   closePopup(imagePopup);

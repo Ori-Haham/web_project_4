@@ -11,7 +11,7 @@ class Card {
     this._link = data.link;
   }
 
-  _getTemplat() {
+  _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
@@ -33,9 +33,9 @@ class Card {
   };
 
   _setEventListeners() {
-    this._cardImage = this._element.querySelector(".card__image");
+    const cardImage = this._element.querySelector(".card__image");
 
-    this._cardImage.addEventListener("click", () => {
+    cardImage.addEventListener("click", () => {
       this._handleOpenPopup();
     });
 
@@ -50,11 +50,13 @@ class Card {
   }
 
   generateCard() {
-    this._element = this._getTemplat();
+    this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__image").alt = this._name;
+    const imageElement = this._element.querySelector(".card__image");
+
+    imageElement.src = this._link;
+    imageElement.alt = this._name;
 
     this._element.querySelector(".card__location").textContent = this._name;
 
