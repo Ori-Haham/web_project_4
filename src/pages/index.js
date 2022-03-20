@@ -19,11 +19,17 @@ import {
   cardsContainer,
   imagePopup,
   userInfoObject,
+  imagePopupImage,
+  imagePopupLocation,
 } from "../scripts/utils/constants";
 
 const userInfo = new UserInfo({ data: userInfoObject });
 
-const popupImage = new PopupWithImage(imagePopup);
+const popupImage = new PopupWithImage(
+  imagePopup,
+  imagePopupImage,
+  imagePopupLocation
+);
 
 const profileFormValidator = new FormValidator(
   ".profile-form",
