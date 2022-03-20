@@ -21,20 +21,30 @@ class Card {
   };
 
   _setEventListeners() {
-    const cardImage = this._element.querySelector(".card__image");
+    this._handleCardClickListener();
 
+    this._handleDeleteButton();
+
+    this._handleCardLikeButton();
+  }
+
+  _handleCardClickListener() {
+    const cardImage = this._element.querySelector(".card__image");
     cardImage.addEventListener("click", (evt) => {
       this._handleCardClick(evt);
     });
+  }
 
+  _handleDeleteButton() {
     const deleteButton = this._element.querySelector(".card__remove-button");
     deleteButton.addEventListener("click", this._hendelDelete);
+  }
 
-    this._element
-      .querySelector(".card__like-button")
-      .addEventListener("click", function (evt) {
-        evt.target.classList.toggle("card__like-button_active");
-      });
+  _handleCardLikeButton() {
+    const cardLikeButton = this._element.querySelector(".card__like-button");
+    cardLikeButton.addEventListener("click", function (evt) {
+      evt.target.classList.toggle("card__like-button_active");
+    });
   }
 
   generateCard() {

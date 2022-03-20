@@ -29,7 +29,7 @@ const imagePopup = document.querySelector(".image-popup");
 const imagePopupCloseButton = imagePopup.querySelector(
   ".image-popup__close-button"
 );
-const imagepPopupImage = imagePopup.querySelector(".image-popup__image");
+const imagePopupImage = imagePopup.querySelector(".image-popup__image");
 const imagePopupLocation = imagePopup.querySelector(".image-popup__location");
 
 const userInfoObject = {
@@ -54,7 +54,7 @@ export {
   cardsContainer,
   imagePopup,
   imagePopupCloseButton,
-  imagepPopupImage,
+  imagePopupImage,
   imagePopupLocation,
   userInfoObject,
 };

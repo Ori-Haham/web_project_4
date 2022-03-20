@@ -1,21 +1,20 @@
-import { nameInput, aboutInput } from "../utils/conatants";
 export default class UserInfo {
   constructor({ data }) {
-    this._name = data.name;
-    this._aboutMe = data.aboutMe;
+    this._nameElement = data.name;
+    this._aboutMeElement = data.aboutMe;
   }
 
   getUserInfo() {
     const userInfo = {};
 
-    userInfo.namee = this._name.textContent;
-    userInfo.aboutMe = this._aboutMe.textContent;
+    userInfo.name = this._nameElement.textContent;
+    userInfo.aboutMe = this._aboutMeElement.textContent;
 
     return userInfo;
   }
 
   setUserInfo(name, aboutMe) {
-    nameInput.value = name.textContent;
-    aboutInput.value = aboutMe.textContent;
+    this._nameElement.textContent = name;
+    this._aboutMeElement.textContent = aboutMe;
   }
 }
