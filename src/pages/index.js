@@ -38,10 +38,10 @@ const profileFormValidator = new FormValidator(
 
 const cardFormValidator = new FormValidator(".card-form", formValidationObject);
 
-const submitProfile = new PopupWithForm(profilePopup, ".profile-form", {
+const profilePopupClass = new PopupWithForm(profilePopup, ".profile-form", {
   handleFormSubmit: () => {
     userInfo.setUserInfo(nameInput.value, aboutInput.value);
-    submitProfile.close();
+    profilePopupClass.close();
   },
 });
 
@@ -63,7 +63,7 @@ const cardList = new Section(
   cardsContainer
 );
 
-const submmitCard = new PopupWithForm(cardPopup, ".card-form", {
+const cardPopupClass = new PopupWithForm(cardPopup, ".card-form", {
   handleFormSubmit: (item) => {
     const cardList = new Section(
       {
@@ -73,21 +73,25 @@ const submmitCard = new PopupWithForm(cardPopup, ".card-form", {
       cardsContainer
     );
     cardList.renderItems();
-    submmitCard.close();
+    cardPopupClass.close();
   },
 });
 
-function openProfileForm() {
+function fillProfileForm() {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   aboutInput.value = userData.aboutMe;
+}
+
+function openProfileForm() {
+  fillProfileForm();
   profileFormValidator.resetValidation();
-  submitProfile.open();
+  profilePopupClass.open();
 }
 
 function openCardPopup() {
   cardFormValidator.resetValidation();
-  submmitCard.open();
+  cardPopupClass.open();
 }
 
 profilePopupOpenButton.addEventListener("click", openProfileForm);
