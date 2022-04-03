@@ -1,10 +1,11 @@
 import "./index.css";
+import Api from "../scripts/components/Api.js";
+
 import logoSrc from "../images/logo.svg";
 import profileSrc from "../images/frofile-image.jpg";
 import { formValidationObject } from "../scripts/utils/formValidationObject.js";
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
-import { initialCards } from "../scripts/utils/initialCardsObject.js";
 import Section from "../scripts/components/Section.js";
 import PopupWithForm from "../scripts/components/PopupWithForm ";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
@@ -21,9 +22,48 @@ import {
   userInfoObject,
   imagePopupImage,
   imagePopupLocation,
+  palceInput,
+  urlInput,
+  profileName,
+  profileAbout,
 } from "../scripts/utils/constants";
 
+const initialCarddApi = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/cards",
+  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
+});
+
+const getUserInfoApi = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me",
+  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
+});
+
+const updateUserInfoApi = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me",
+  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
+});
+
+const postCardApi = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/cards",
+  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
+});
+
+function setProfileInfo(name, about) {
+  profileName.textContent = name;
+  profileAbout.textContent = about;
+}
+
+function handelUserInfo() {
+  getUserInfoApi.returnJson().then((res) => {
+    setProfileInfo(res.name, res.about);
+  });
+}
+
 const userInfo = new UserInfo({ data: userInfoObject });
+
+getUserInfoApi.returnJson().then((res) => {
+  userInfo.setUserInfo(res.name, res.about);
+});
 
 const popupImage = new PopupWithImage(
   imagePopup,
@@ -41,11 +81,17 @@ const cardFormValidator = new FormValidator(".card-form", formValidationObject);
 const profilePopupClass = new PopupWithForm(profilePopup, ".profile-form", {
   handleFormSubmit: () => {
     userInfo.setUserInfo(nameInput.value, aboutInput.value);
+    updateUserInfoApi
+      .updateUserData(userInfo.getUserInfo().name, userInfo.getUserInfo().about)
+      .then(() => {
+        handelUserInfo();
+      });
     profilePopupClass.close();
   },
 });
 
-const renderCard = (item) => {
+function renderCard(item) {
+  console.log(item);
   const card = new Card(item, "#card-template", {
     handleCardClick: (evt) => {
       popupImage.open({ src: evt.target.src, alt: evt.target.alt });
@@ -53,34 +99,45 @@ const renderCard = (item) => {
   });
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
-};
+}
 
 const cardList = new Section(
   {
-    data: initialCards,
     renderer: renderCard,
   },
   cardsContainer
 );
 
+initialCarddApi.returnJson().then((res) => {
+  cardList.renderItems(res);
+});
+
 const cardPopupClass = new PopupWithForm(cardPopup, ".card-form", {
-  handleFormSubmit: (item) => {
-    const cardList = new Section(
-      {
-        data: [item],
-        renderer: renderCard,
-      },
-      cardsContainer
-    );
-    cardList.renderItems();
-    cardPopupClass.close();
+  handleFormSubmit: () => {
+    postCardApi
+      .postCard(palceInput.value, urlInput.value)
+      .then((card) => {
+        if (card.ok) {
+          return card.json();
+        }
+        return Promise.reject(`Error: ${card.status}`);
+      })
+      .then((card) => {
+        console.log(card);
+      })
+      .then((card) => {
+        cardList.renderItems([card]);
+      })
+      .then(() => {
+        cardPopupClass.close();
+      });
   },
 });
 
 function fillProfileForm() {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
-  aboutInput.value = userData.aboutMe;
+  aboutInput.value = userData.about;
 }
 
 function openProfileForm() {
@@ -94,11 +151,11 @@ function openCardPopup() {
   cardPopupClass.open();
 }
 
+handelUserInfo();
+
 profilePopupOpenButton.addEventListener("click", openProfileForm);
 
 cardPopupOpenButton.addEventListener("click", openCardPopup);
-
-cardList.renderItems();
 
 profileFormValidator.enableValidation();
 
@@ -107,6 +164,10 @@ cardFormValidator.enableValidation();
 const logoImage = document.getElementById("logo");
 logoImage.src = logoSrc;
 
-const profileImage = document.getElementById("profileImg");
+/*const inputList = [...cardPopup.querySelectorAll(".popup__input")];
 
-profileImage.src = profileSrc;
+        const inputValues = {};
+
+        inputList.forEach((input) => {
+          inputValues[input.name] = input.value;
+        });*/

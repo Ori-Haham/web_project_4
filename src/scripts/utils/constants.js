@@ -3,6 +3,7 @@ const cardPopupOpenButton = document.querySelector(".profile__add-button");
 
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about-me");
+const profileImage = document.querySelector(".profile__image");
 
 const profilePopup = document.querySelector(".profile-popup");
 const profilePopupCloseButton = profilePopup.querySelector(
@@ -22,6 +23,8 @@ const submitProfileButton = profileForm.querySelector(
 );
 
 const cardForm = document.querySelector(".card-form");
+const palceInput = cardForm.querySelector(".card-form__place");
+const urlInput = cardForm.querySelector(".card-form__url");
 
 const cardsContainer = document.querySelector(".cards");
 
@@ -33,8 +36,8 @@ const imagePopupImage = imagePopup.querySelector(".image-popup__image");
 const imagePopupLocation = imagePopup.querySelector(".image-popup__location");
 
 const userInfoObject = {
-  name: profileName,
-  aboutMe: profileAbout,
+  name: profileName.textContent,
+  about: profileAbout.textContent,
 };
 
 export {
@@ -42,6 +45,7 @@ export {
   cardPopupOpenButton,
   profileName,
   profileAbout,
+  profileImage,
   profilePopup,
   profilePopupCloseButton,
   cardPopup,
@@ -51,6 +55,8 @@ export {
   aboutInput,
   submitProfileButton,
   cardForm,
+  palceInput,
+  urlInput,
   cardsContainer,
   imagePopup,
   imagePopupCloseButton,

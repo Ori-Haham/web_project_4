@@ -6,6 +6,11 @@ class Card {
     this._handleCardClick = handleCardClick;
   }
 
+  t() {
+    const t = { name: this._name };
+    return t;
+  }
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
