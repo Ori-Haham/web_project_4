@@ -24,13 +24,12 @@
 @import url(../styles/blocks/card/__location/card__location.css);
 @import url(../styles/blocks/card/__like-button/card__like-button.css);
 @import url(../styles/blocks/card/__like-button/_active/card__like-button_active.css);
-@import url(../styles/blocks/card/__likeCount/card__likeCount.css);
+@import url(../styles/blocks/card/__likeCount.css/card__likeCounte.css);
 
 @import url(../styles/blocks/footer/footer.css);
 @import url(../styles/blocks/footer/__rights/footer__rights.css);
 
 @import url(../styles/blocks/profile-popup/__container/profile-popup__container.css);
-@import url(../styles/blocks/profile-popup/__close-button/profile-popup__close-button.css);
 @import url(../styles/blocks/pfofile-form/profile-form.css);
 @import url(../styles/blocks/pfofile-form/__fieldset/profile-form__fieldset.css);
 @import url(../styles/blocks/pfofile-form/__heading/profile-form__heading.css);
@@ -38,7 +37,6 @@
 @import url(../styles/blocks/pfofile-form/__submit-button/profile-form__submit-button.css);
 
 @import url(../styles/blocks/card-popup/__container/card-popup__container.css);
-@import url(../styles/blocks/card-popup/__close-button/card-popup__close-button.css);
 @import url(../styles/blocks/card-form/card-form.css);
 @import url(../styles/blocks/card-form/__fieldset/card-form__fieldset.css);
 @import url(../styles/blocks/card-form/__heading/card-form__heading.css);
@@ -52,6 +50,13 @@
 
 @import url(../styles/blocks/popup/popup.css);
 @import url(../styles/blocks/popup-hidden/popup-hidden.css);
+@import url(../styles/blocks/popup/__close-button/popup__close-button.css);
 @import url(../styles/blocks/popup/popup__input/_type/_error/popup__input_type_error.css);
 @import url(../styles/blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../styles/blocks/popup/__button/__button.css);
 @import url(../styles/blocks/popup/__button/_disabled/popup__button_disabled.css);
+
+@import url(../styles/blocks/deleteCardpopup/deleteCardPopup.css);
+@import url(../styles/blocks/deleteCardpopup/deleteCarsPopup__container/deleteCarsPopup__container.css);
+@import url(../styles/blocks/deleteCardpopup/__heading/deleteCardPopup__heading.css);
+@import url(../styles/blocks/deleteCardpopup/__yesButton/deleteCardPopup__yesButton.css);

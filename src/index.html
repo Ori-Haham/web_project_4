@@ -130,7 +130,31 @@
           <h2 class="card__location"></h2>
           <div>
             <button class="card__like-button" type="button"></button>
-            <p class="card__likeCount">1</p>
+            <p class="card__likeCounte"></p>
+          </div>
+        </div>
+        <div class="popup deleteCardPopup popup-hidden">
+          <div class="deleteCardPopup__container">
+            <button
+              class="deleteCardPopup__close-button popup__close-button"
+              type="button"
+            ></button>
+            <h2 class="deleteCardPopup__heading">Are you sure?</h2>
+            <button class="popup__button deleteCardPopup__yesButton">
+              Yes
+            </button>
+          </div>
+        </div>
+      </article>
+    </template>
+    <template id="initial-cards-template">
+      <article class="card">
+        <img class="card__image" />
+        <div class="card__location-like-container">
+          <h2 class="card__location"></h2>
+          <div>
+            <button class="card__like-button" type="button"></button>
+            <p class="card__likeCounte"></p>
           </div>
         </div>
       </article>

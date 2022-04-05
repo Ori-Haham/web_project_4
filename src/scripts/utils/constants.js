@@ -34,7 +34,6 @@ const imagePopupCloseButton = imagePopup.querySelector(
 );
 const imagePopupImage = imagePopup.querySelector(".image-popup__image");
 const imagePopupLocation = imagePopup.querySelector(".image-popup__location");
-
 const userInfoObject = {
   name: profileName.textContent,
   about: profileAbout.textContent,

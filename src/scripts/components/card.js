@@ -1,14 +1,11 @@
 class Card {
-  constructor(data, cardSelector, { handleCardClick }) {
+  constructor(data, cardSelector, { handleCardClick, updateApiOnLike }) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-  }
-
-  t() {
-    const t = { name: this._name };
-    return t;
+    this._updateApiOnLike = updateApiOnLike;
   }
 
   _getTemplate() {
@@ -20,15 +17,8 @@ class Card {
     return cardElement;
   }
 
-  _hendelDelete = () => {
-    this._element.remove();
-    this._element = null;
-  };
-
   _setEventListeners() {
     this._handleCardClickListener();
-
-    this._handleDeleteButton();
 
     this._handleCardLikeButton();
   }
@@ -40,15 +30,11 @@ class Card {
     });
   }
 
-  _handleDeleteButton() {
-    const deleteButton = this._element.querySelector(".card__remove-button");
-    deleteButton.addEventListener("click", this._hendelDelete);
-  }
-
   _handleCardLikeButton() {
     const cardLikeButton = this._element.querySelector(".card__like-button");
     cardLikeButton.addEventListener("click", function (evt) {
       evt.target.classList.toggle("card__like-button_active");
+      this._updateApiOnLike();
     });
   }
 
@@ -62,6 +48,9 @@ class Card {
     imageElement.alt = this._name;
 
     this._element.querySelector(".card__location").textContent = this._name;
+
+    this._likesCounte = this._element.querySelector(".card__likeCounte");
+    this._likesCounte.textContent = this._likes.length;
 
     return this._element;
   }

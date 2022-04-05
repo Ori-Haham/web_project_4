@@ -1,0 +1,15 @@
+.deleteCardPopup__container {
+  width: 430px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 580px) {
+  .deleteCardPopup__container {
+    width: 282px;
+  }
+}

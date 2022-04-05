@@ -39,4 +39,26 @@ export default class Api {
       }),
     });
   }
+
+  deleteCard(cardId) {
+    return fetch(
+      `https://around.nomoreparties.co/v1/group-12/cards/${cardId}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: this._authorization,
+        },
+      }
+    );
+  }
+
+  likeCard(method, cardId) {
+    return fetch(
+      `https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`,
+      {
+        method: method,
+        headers: { authorization: this._authorization },
+      }
+    );
+  }
 }
