@@ -14,14 +14,8 @@ const profileImagePopup = document.querySelector(".profile-image-popup");
 const imageInput = document.querySelector(".image-input");
 
 const profilePopup = document.querySelector(".profile-popup");
-const profilePopupCloseButton = profilePopup.querySelector(
-  ".profile-popup__close-button"
-);
 
 const cardPopup = document.querySelector(".card-popup");
-const cardPopupCloseButton = cardPopup.querySelector(
-  ".card-popup__close-button"
-);
 
 const profileForm = document.querySelector(".profile-form");
 const nameInput = profileForm.querySelector(".profile-form__name");
@@ -58,9 +52,7 @@ export {
   profileImagePopup,
   imageInput,
   profilePopup,
-  profilePopupCloseButton,
   cardPopup,
-  cardPopupCloseButton,
   profileForm,
   nameInput,
   aboutInput,

@@ -36,14 +36,14 @@
       <p class="footer__rights">© 2021 Around The U.S.</p>
     </footer>
     <div class="popup profile-popup popup-hidden">
-      <div class="profile-popup__container">
+      <div class="popup__container">
         <button
           class="profile-popup__close-button popup__close-button"
           type="button"
         ></button>
         <form class="popup__form profile-form" name="profileForm" novalidate>
-          <h2 class="profile-form__heading">Edit profile</h2>
-          <fieldset class="profile-form__fieldset popup__fieldset">
+          <h2 class="form__heading">Edit profile</h2>
+          <fieldset class="profile-form__fieldset form__fieldset">
             <input
               id="name-input"
               class="popup__input profile-form__item profile-form__name"
@@ -78,14 +78,14 @@
       </div>
     </div>
     <div class="popup card-popup popup-hidden">
-      <div class="card-popup__container">
+      <div class="popup__container">
         <button
           class="card-popup__close-button popup__close-button"
           type="button"
         ></button>
         <form class="popup__form card-form" name="card-form" novalidate>
-          <h2 class="card-form__heading">New Place</h2>
-          <fieldset class="card-form__fieldset popup__fieldset">
+          <h2 class="form__heading">New Place</h2>
+          <fieldset class="card-form__fieldset form__fieldset">
             <input
               id="place-input"
               class="popup__input card-form__item card-form__place"
@@ -128,18 +128,17 @@
       </div>
     </div>
     <div class="popup profile-image-popup popup-hidden">
-      <div class="card-popup__container">
-        <button
-          class="card-popup__close-button popup__close-button"
-          type="button"
-        ></button>
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
         <form
-          class="popup__form card-form profile-image-form"
-          name="card-form"
+          class="popup__form profile-image-form form"
+          name="image-form"
           novalidate
         >
-          <h2 class="card-form__heading">Change profile picture</h2>
-          <fieldset class="card-form__fieldset popup__fieldset">
+          <h2 class="profile-image-form__heading form__heading">
+            Change profile picture
+          </h2>
+          <fieldset class="profile-image-form__fieldset form__fieldset">
             <input
               id="image-url-input"
               class="popup__input image-input"
