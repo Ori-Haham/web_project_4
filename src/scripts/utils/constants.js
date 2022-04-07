@@ -1,9 +1,17 @@
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 const cardPopupOpenButton = document.querySelector(".profile__add-button");
 
+const profileImageContainer = document.querySelector(
+  ".profile__image-container"
+);
+
+const profileImageOverlay = document.querySelector(".profile__image-container");
+const profileImage = document.querySelector(".profile__image");
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about-me");
-const profileImage = document.querySelector(".profile__image");
+
+const profileImagePopup = document.querySelector(".profile-image-popup");
+const imageInput = document.querySelector(".image-input");
 
 const profilePopup = document.querySelector(".profile-popup");
 const profilePopupCloseButton = profilePopup.querySelector(
@@ -42,9 +50,13 @@ const userInfoObject = {
 export {
   profilePopupOpenButton,
   cardPopupOpenButton,
+  profileImageContainer,
+  profileImageOverlay,
+  profileImage,
   profileName,
   profileAbout,
-  profileImage,
+  profileImagePopup,
+  imageInput,
   profilePopup,
   profilePopupCloseButton,
   cardPopup,

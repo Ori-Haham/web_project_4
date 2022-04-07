@@ -13,7 +13,12 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__image" alt="profile image" />
+        <div class="profile__image-container">
+          <img class="profile__image" src="" alt="profile image" />
+          <div class="profile__edit-icon-container">
+            <img id="edit-icon" class="profile__edit-icon" src="" />
+          </div>
+        </div>
         <div class="profile__info">
           <div class="profile__info-container">
             <h1 class="profile__name"></h1>
@@ -122,13 +127,42 @@
         <h4 class="image-popup__location"></h4>
       </div>
     </div>
+    <div class="popup profile-image-popup popup-hidden">
+      <div class="card-popup__container">
+        <button
+          class="card-popup__close-button popup__close-button"
+          type="button"
+        ></button>
+        <form
+          class="popup__form card-form profile-image-form"
+          name="card-form"
+          novalidate
+        >
+          <h2 class="card-form__heading">Change profile picture</h2>
+          <fieldset class="card-form__fieldset popup__fieldset">
+            <input
+              id="url-input"
+              class="popup__input image-input"
+              name="image-Link"
+              type="url"
+              placeholder="Profile Image URL"
+              required
+            />
+            <span class="url-input-error input-error"></span>
+            <button class="popup__button" type="submit" value="Submit">
+              Save
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
     <template id="card-template">
       <article class="card">
         <img class="card__image" />
         <button class="card__remove-button" type="button"></button>
         <div class="card__location-like-container">
           <h2 class="card__location"></h2>
-          <div>
+          <div class="card__like-container">
             <button class="card__like-button" type="button"></button>
             <p class="card__likeCounte"></p>
           </div>

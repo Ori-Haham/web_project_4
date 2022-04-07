@@ -1,0 +1,16 @@
+.profile__edit-icon-container {
+  width: 121px;
+  height: 121.5px;
+  position: absolute;
+  left: 0;
+  top: -0.5px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s linear 0.1s;
+}
+
+.profile__edit-icon-container:hover {
+  opacity: 1;
+}

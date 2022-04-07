@@ -1,0 +1,7 @@
+.profile__edit-icon_hover {
+  transition: display 0.6s linear 0.1s;
+}
+
+.profile__edit-icon_hover:hover {
+  display: block;
+}

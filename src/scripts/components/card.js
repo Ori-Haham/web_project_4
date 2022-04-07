@@ -32,10 +32,15 @@ class Card {
 
   _handleCardLikeButton() {
     const cardLikeButton = this._element.querySelector(".card__like-button");
-    cardLikeButton.addEventListener("click", function (evt) {
+    cardLikeButton.addEventListener("click", (evt) => {
       evt.target.classList.toggle("card__like-button_active");
-      this._updateApiOnLike();
+      this._updateApiOnLike(evt);
     });
+  }
+
+  returnLikeCounter() {
+    this._likesCounte = this._element.querySelector(".card__likeCounte");
+    return this._likesCounte;
   }
 
   generateCard() {
@@ -52,7 +57,18 @@ class Card {
     this._likesCounte = this._element.querySelector(".card__likeCounte");
     this._likesCounte.textContent = this._likes.length;
 
+    this._highlightUserLike();
+
     return this._element;
+  }
+
+  _highlightUserLike() {
+    const cardLikeButton = this._element.querySelector(".card__like-button");
+    this._likes.forEach((like) => {
+      if (like._id === "3dcd812fefd0b46115095582") {
+        cardLikeButton.classList.add("card__like-button_active");
+      }
+    });
   }
 }
 

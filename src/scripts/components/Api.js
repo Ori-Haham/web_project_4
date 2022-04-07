@@ -61,4 +61,17 @@ export default class Api {
       }
     );
   }
+
+  editProfileImage(avatar) {
+    return fetch(this._baseUrl, {
+      method: "PATCH",
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    });
+  }
 }

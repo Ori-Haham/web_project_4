@@ -4,20 +4,25 @@ export default class UserCard extends Card {
   constructor(
     data,
     cardSelector,
-    { handleCardClick, updateApiOnLike, handleDeleteButtonClick, tt }
+    {
+      handleCardClick,
+      updateApiOnLike,
+      handleDeleteButtonClick,
+      handelCardDelete,
+    }
   ) {
     super(data, cardSelector, { handleCardClick, updateApiOnLike });
     this._handleDeleteButtonClick = handleDeleteButtonClick;
-    this._tt = tt;
+    this._cardDelete = handelCardDelete;
   }
 
   _handelDelete = () => {
-    this._tt();
     this._element.remove();
     this._element = null;
+    this._cardDelete();
   };
 
-  x() {
+  deleteCardListenr() {
     const deleteCardButton = this._element.querySelector(".popup__button");
     deleteCardButton.addEventListener("click", this._handelDelete);
   }
@@ -26,14 +31,17 @@ export default class UserCard extends Card {
     super._setEventListeners();
 
     this._handleDeleteButton();
-    this.x();
+    this.deleteCardListenr();
   };
 
   _handleDeleteButton() {
     const deleteButton = this._element.querySelector(".card__remove-button");
     deleteButton.addEventListener("click", (evt) => {
       this._handleDeleteButtonClick(evt);
-      console.log(evt);
     });
+  }
+
+  cardElement() {
+    return this._element;
   }
 }
