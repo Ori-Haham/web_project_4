@@ -13,18 +13,19 @@ export default class UserCard extends Card {
   ) {
     super(data, cardSelector, { handleCardClick, updateApiOnLike });
     this._handleDeleteButtonClick = handleDeleteButtonClick;
-    this._cardDelete = handelCardDelete;
+    this._deleteCard = handelCardDelete;
   }
 
-  _handelDelete = () => {
+  removeCardFromDOM() {
     this._element.remove();
     this._element = null;
-    this._cardDelete();
-  };
+  }
 
   deleteCardListenr() {
     const deleteCardButton = this._element.querySelector(".popup__button");
-    deleteCardButton.addEventListener("click", this._handelDelete);
+    deleteCardButton.addEventListener("click", () => {
+      this._deleteCard();
+    });
   }
 
   _setEventListeners = () => {

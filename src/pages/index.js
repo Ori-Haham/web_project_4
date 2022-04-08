@@ -126,7 +126,9 @@ function renderCard(item) {
             baseUrl: "",
             authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
           });
-          deleteCardApi.deleteCard(item._id);
+          deleteCardApi.deleteCard(item._id).then(() => {
+            card.removeCardFromDOM();
+          });
         },
         handleDeleteButtonClick: () => {
           const deleteCardPopup = new Popup(
