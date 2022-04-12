@@ -13,6 +13,7 @@ import UserInfo from "../scripts/components/UserInfo";
 import {
   profileImage,
   profileImageOverlay,
+  profileImageError,
   profileName,
   profileAbout,
   profilePopupOpenButton,
@@ -313,7 +314,16 @@ function fillImageForm() {
 }
 
 function setUserImage() {
-  getUserInfoApi.returnJson().then((info) => (profileImage.src = info.avatar));
+  api
+    .getUserInfoApi("/users/me")
+    .then(
+      (info) => (
+        (profileImageError.textContent = ""), (profileImage.src = info.avatar)
+      )
+    )
+    .catch((err) => {
+      profileImageError.textContent = `Error: ${err} !`;
+    });
 }
 
 function openPopupImage() {
