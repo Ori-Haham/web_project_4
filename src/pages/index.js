@@ -1,5 +1,4 @@
 import "./index.css";
-import Api from "../scripts/components/Api.js";
 import logoSrc from "../images/logo.svg";
 import profileSrc from "../images/edit.svg";
 import { formValidationObject } from "../scripts/utils/formValidationObject.js";
@@ -18,6 +17,7 @@ import {
   profileAbout,
   profilePopupOpenButton,
   cardPopupOpenButton,
+  cardsError,
   profileImagePopup,
   imageInput,
   profilePopup,
@@ -30,38 +30,12 @@ import {
   imagePopupImage,
   imagePopupLocation,
   cardsContainer,
-  userInfoObject,
 } from "../scripts/utils/constants";
 import { Popup } from "../scripts/components/Popup";
-import xpi from "../scripts/components/xpi";
+import Api from "../scripts/components/xpi";
 
-const api = new xpi({
+const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
-const updateUserInfoApi = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
-const profileImageApi = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me/avatar ",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
-const initialCarddApi = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/cards",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
-const postCardApi = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/cards",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
-const likeCardApi = new Api({
-  baseUrl: "",
   authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
 });
 
@@ -82,6 +56,19 @@ const userInfo = new UserInfo({
   aboutMeSelector: "profile-form__about-me",
 });
 
+function setUserImage() {
+  api
+    .getUserInfoApi("/users/me")
+    .then(
+      (info) => (
+        (profileImageError.textContent = ""), (profileImage.src = info.avatar)
+      )
+    )
+    .catch((err) => {
+      profileImageError.textContent = `Error: ${err} !`;
+    });
+}
+
 const profileImagePopupClass = new PopupWithForm(
   profileImagePopup,
   ".profile-image-form",
@@ -90,13 +77,16 @@ const profileImagePopupClass = new PopupWithForm(
   {
     handleFormSubmit: () => {
       profileImagePopupClass.showLoading();
-      profileImageApi
-        .editProfileImage(imageInput.value)
+      api
+        .editProfileImage("/users/me/avatar", imageInput.value)
         .then(() => {
-          setUserImage();
+          (profileImageError.textContent = ""), setUserImage();
         })
         .then(() => {
           profileImagePopupClass.close();
+        })
+        .catch((err) => {
+          profileImageError.textContent = `Error: ${err} !`;
         });
     },
   }
@@ -130,9 +120,23 @@ const profilePopupClass = new PopupWithForm(
   }
 );
 
+function handelLike(method, item, card) {
+  api
+    .likeCard(method, item._id)
+    .then((card) => {
+      return card.json();
+    })
+    .then((card) => {
+      return card;
+    })
+    .then((like) => {
+      card.updateLikes(like);
+    });
+}
+
 function renderCard(item) {
   function isUserCard() {
-    if (item.owner._id === "3dcd812fefd0b46115095582") {
+    if (item.owner.name === "Shaul Canlo Alvarez") {
       const card = new UserCard(
         item,
         "#card-template",
@@ -158,29 +162,9 @@ function renderCard(item) {
           },
           handleLike: (evt) => {
             if (evt.target.classList.contains("card__like-button_active")) {
-              likeCardApi
-                .likeCard("DELETE", item._id)
-                .then((card) => {
-                  return card.json();
-                })
-                .then((card) => {
-                  return card;
-                })
-                .then((like) => {
-                  card.updateLikes(like);
-                });
+              handelLike("DELETE", item, card);
             } else {
-              likeCardApi
-                .likeCard("PUT", item._id)
-                .then((card) => {
-                  return card.json();
-                })
-                .then((card) => {
-                  return card;
-                })
-                .then((like) => {
-                  card.updateLikes(like);
-                });
+              handelLike("PUT", item, card);
             }
           },
         }
@@ -198,29 +182,9 @@ function renderCard(item) {
           },
           handleLike: (evt) => {
             if (evt.target.classList.contains("card__like-button_active")) {
-              likeCardApi
-                .likeCard("DELETE", item._id)
-                .then((like) => {
-                  return like.json();
-                })
-                .then((like) => {
-                  return like;
-                })
-                .then((like) => {
-                  card.updateLikes(like);
-                });
+              handelLike("DELETE", item, card);
             } else {
-              likeCardApi
-                .likeCard("PUT", item._id)
-                .then((like) => {
-                  return like.json();
-                })
-                .then((like) => {
-                  return like;
-                })
-                .then((like) => {
-                  card.updateLikes(like);
-                });
+              handelLike("PUT", item, card);
             }
           },
         }
@@ -239,9 +203,15 @@ const cardList = new Section(
   cardsContainer
 );
 
-initialCarddApi.returnJson().then((res) => {
-  cardList.renderItems(res);
-});
+api
+  .getinitialCard("/cards")
+  .then((res) => {
+    cardsError.textContent = "";
+    cardList.renderItems(res);
+  })
+  .catch((err) => {
+    cardsError.textContent = `Error: ${err} !`;
+  });
 
 const cardPopupClass = new PopupWithForm(
   cardPopup,
@@ -251,8 +221,8 @@ const cardPopupClass = new PopupWithForm(
   {
     handleFormSubmit: () => {
       cardPopupClass.showLoading();
-      postCardApi
-        .postCard(palceInput.value, urlInput.value)
+      api
+        .postCard("/cards", palceInput.value, urlInput.value)
         .then((card) => {
           if (card.ok) {
             return card.json();
@@ -264,8 +234,6 @@ const cardPopupClass = new PopupWithForm(
         })
         .then((card) => {
           cardList.renderItems([card]);
-        })
-        .then(() => {
           cardPopupClass.close();
         });
     },
@@ -306,19 +274,6 @@ function openCardPopup() {
 
 function fillImageForm() {
   imageInput.value = profileImage.src;
-}
-
-function setUserImage() {
-  api
-    .getUserInfoApi("/users/me")
-    .then(
-      (info) => (
-        (profileImageError.textContent = ""), (profileImage.src = info.avatar)
-      )
-    )
-    .catch((err) => {
-      profileImageError.textContent = `Error: ${err} !`;
-    });
 }
 
 function openPopupImage() {
