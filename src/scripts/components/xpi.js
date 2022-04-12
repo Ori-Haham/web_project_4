@@ -26,6 +26,11 @@ export default class xpi {
         name: name,
         about: about,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(res.status);
     });
   }
 

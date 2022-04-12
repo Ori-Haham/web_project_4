@@ -40,11 +40,6 @@ const api = new xpi({
   authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
 });
 
-const getUserInfoApi = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me",
-  authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-});
-
 const updateUserInfoApi = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12/users/me",
   authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
@@ -122,15 +117,15 @@ const profilePopupClass = new PopupWithForm(
     handleFormSubmit: () => {
       profilePopupClass.showLoading();
       userInfo.setUserInfo(nameInput.value, aboutInput.value);
-      updateUserInfoApi
-        .updateUserData(
-          userInfo.getUserInfo().name,
-          userInfo.getUserInfo().about
-        )
-        .then(() => {
-          handelUserInfo();
+      api
+        .updateUserData("/users/me", nameInput.value, aboutInput.value)
+        .then((res) => {
+          setProfileInfo(res.name, res.about);
+          profilePopupClass.close();
+        })
+        .catch((err) => {
+          setProfileInfo(`Oops, error: ${err} !`, `Oops, error: ${err} !`);
         });
-      profilePopupClass.close();
     },
   }
 );
