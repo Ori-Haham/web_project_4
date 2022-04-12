@@ -4,11 +4,14 @@ const cardPopupOpenButton = document.querySelector(".profile__add-button");
 const profileImageContainer = document.querySelector(
   ".profile__image-container"
 );
+const profileImageError = document.querySelector(".profile__image-error");
 
 const profileImageOverlay = document.querySelector(".profile__image-container");
 const profileImage = document.querySelector(".profile__image");
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about-me");
+
+const cardsError = document.querySelector(".cards__error");
 
 const profileImagePopup = document.querySelector(".profile-image-popup");
 const imageInput = document.querySelector(".image-input");
@@ -45,10 +48,12 @@ export {
   profilePopupOpenButton,
   cardPopupOpenButton,
   profileImageContainer,
+  profileImageError,
   profileImageOverlay,
   profileImage,
   profileName,
   profileAbout,
+  cardsError,
   profileImagePopup,
   imageInput,
   profilePopup,

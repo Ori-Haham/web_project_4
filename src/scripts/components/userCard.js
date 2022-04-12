@@ -4,14 +4,10 @@ export default class UserCard extends Card {
   constructor(
     data,
     cardSelector,
-    {
-      handleCardClick,
-      updateApiOnLike,
-      handleDeleteButtonClick,
-      handelCardDelete,
-    }
+    userId,
+    { handleCardClick, handleLike, handleDeleteButtonClick, handelCardDelete }
   ) {
-    super(data, cardSelector, { handleCardClick, updateApiOnLike });
+    super(data, cardSelector, userId, { handleCardClick, handleLike });
     this._handleDeleteButtonClick = handleDeleteButtonClick;
     this._deleteCard = handelCardDelete;
   }
