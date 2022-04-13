@@ -151,20 +151,24 @@ function renderCard(item) {
           handleCardClick: (evt) => {
             popupImage.open({ src: evt.target.src, alt: evt.target.alt });
           },
-          handelCardDelete: () => {
-            const deleteCardApi = new Api({
-              baseUrl: "",
-              authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
-            });
-            deleteCardApi.deleteCard(item._id).then(() => {
-              card.removeCardFromDOM();
-            });
-          },
           handleDeleteButtonClick: () => {
             const deleteCardPopup = new Popup(
               card.cardElement().querySelector(".deleteCardPopup")
             );
             deleteCardPopup.open();
+            const deleteCardYesButton = card
+              .cardElement()
+              .querySelector(".popup__button");
+            deleteCardYesButton.addEventListener("click", () => {
+              api
+                .deleteCard(`/cards/${item._id}`)
+                .then(() => {
+                  card.removeCardFromDOM();
+                })
+                .catch((err) => {
+                  console.log(`Oops, error: ${err} !`);
+                });
+            });
           },
           handleLike: (evt) => {
             if (evt.target.classList.contains("card__like-button_active")) {

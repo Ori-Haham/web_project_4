@@ -5,11 +5,10 @@ export default class UserCard extends Card {
     data,
     cardSelector,
     userId,
-    { handleCardClick, handleLike, handleDeleteButtonClick, handelCardDelete }
+    { handleCardClick, handleLike, handleDeleteButtonClick }
   ) {
     super(data, cardSelector, userId, { handleCardClick, handleLike });
     this._handleDeleteButtonClick = handleDeleteButtonClick;
-    this._deleteCard = handelCardDelete;
   }
 
   removeCardFromDOM() {
@@ -17,18 +16,10 @@ export default class UserCard extends Card {
     this._element = null;
   }
 
-  deleteCardListenr() {
-    const deleteCardButton = this._element.querySelector(".popup__button");
-    deleteCardButton.addEventListener("click", () => {
-      this._deleteCard();
-    });
-  }
-
   _setEventListeners = () => {
     super._setEventListeners();
 
     this._handleDeleteButton();
-    this.deleteCardListenr();
   };
 
   _handleDeleteButton() {
