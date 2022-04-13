@@ -32,7 +32,7 @@ import {
   cardsContainer,
 } from "../scripts/utils/constants";
 import { Popup } from "../scripts/components/Popup";
-import Api from "../scripts/components/xpi";
+import Api from "../scripts/components/Api";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -59,13 +59,11 @@ const userInfo = new UserInfo({
 function setUserImage() {
   api
     .getUserInfoApi("/users/me")
-    .then(
-      (info) => (
-        (profileImageError.textContent = ""), (profileImage.src = info.avatar)
-      )
-    )
+    .then((res) => {
+      profileImage.src = res.avatar;
+    })
     .catch((err) => {
-      profileImageError.textContent = `Error: ${err} !`;
+      console.log(`Error: ${err} !`);
     });
 }
 
@@ -81,8 +79,6 @@ const profileImagePopupClass = new PopupWithForm(
         .editProfileImage("/users/me/avatar", imageInput.value)
         .then(() => {
           setUserImage();
-        })
-        .then(() => {
           profileImagePopupClass.close();
         })
         .catch((err) => {
@@ -126,59 +122,44 @@ const profilePopupClass = new PopupWithForm(
   }
 );
 
-function handelLike(method, item, card) {
-  api
-    .likeCard(method, item._id)
-    .then((card) => {
-      return card.json();
-    })
-    .then((card) => {
-      return card;
-    })
-    .then((like) => {
-      card.updateLikes(like);
-    });
+function handleCardClick(evt) {
+  handleCardClick(evt);
 }
 
 function renderCard(item) {
   function isUserCard() {
     if (item.owner.name === "Shaul Canlo Alvarez") {
-      const card = new UserCard(
-        item,
-        "#card-template",
-        "3dcd812fefd0b46115095582",
-        {
-          handleCardClick: (evt) => {
-            popupImage.open({ src: evt.target.src, alt: evt.target.alt });
-          },
-          handleDeleteButtonClick: () => {
-            const deleteCardPopup = new Popup(
-              card.cardElement().querySelector(".deleteCardPopup")
-            );
-            deleteCardPopup.open();
-            const deleteCardYesButton = card
-              .cardElement()
-              .querySelector(".popup__button");
-            deleteCardYesButton.addEventListener("click", () => {
-              api
-                .deleteCard(`/cards/${item._id}`)
-                .then(() => {
-                  card.removeCardFromDOM();
-                })
-                .catch((err) => {
-                  console.log(`Oops, error: ${err} !`);
-                });
-            });
-          },
-          handleLike: (evt) => {
-            if (evt.target.classList.contains("card__like-button_active")) {
-              handelLike("DELETE", item, card);
-            } else {
-              handelLike("PUT", item, card);
-            }
-          },
-        }
-      );
+      const card = new UserCard(item, "#card-template", item.owner._id, {
+        handleCardClick: (evt) => {
+          handleCardClick(evt);
+        },
+        handleDeleteButtonClick: () => {
+          const deleteCardPopup = new Popup(
+            card.cardElement().querySelector(".deleteCardPopup")
+          );
+          deleteCardPopup.open();
+          const deleteCardYesButton = card
+            .cardElement()
+            .querySelector(".popup__button");
+          deleteCardYesButton.addEventListener("click", () => {
+            api
+              .deleteCard(`/cards/${item._id}`)
+              .then(() => {
+                card.removeCardFromDOM();
+              })
+              .catch((err) => {
+                console.log(`Oops, error: ${err} !`);
+              });
+          });
+        },
+        handleLike: (evt) => {
+          if (evt.target.classList.contains("card__like-button_active")) {
+            api.removeLike(api, item, card);
+          } else {
+            api.handelLike(api, item, card);
+          }
+        },
+      });
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     } else {
@@ -188,13 +169,13 @@ function renderCard(item) {
         "3dcd812fefd0b46115095582",
         {
           handleCardClick: (evt) => {
-            popupImage.open({ src: evt.target.src, alt: evt.target.alt });
+            handleCardClick(evt);
           },
           handleLike: (evt) => {
             if (evt.target.classList.contains("card__like-button_active")) {
-              handelLike("DELETE", item, card);
+              api.removeLike(api, item, card);
             } else {
-              handelLike("PUT", item, card);
+              api.handelLike(api, item, card);
             }
           },
         }
@@ -214,13 +195,13 @@ const cardList = new Section(
 );
 
 api
-  .getinitialCard("/cards")
+  .getInitialCard("/cards")
   .then((res) => {
     cardsError.textContent = "";
     cardList.renderItems(res);
   })
   .catch((err) => {
-    cardsError.textContent = `Error: ${err} !`;
+    console.log(`Error: ${err} !`);
   });
 
 const cardPopupClass = new PopupWithForm(
@@ -233,15 +214,6 @@ const cardPopupClass = new PopupWithForm(
       cardPopupClass.showLoading();
       api
         .postCard("/cards", palceInput.value, urlInput.value)
-        .then((card) => {
-          if (card.ok) {
-            return card.json();
-          }
-          return Promise.reject(`Error: ${card.status}`);
-        })
-        .then((card) => {
-          return card;
-        })
         .then((card) => {
           cardList.renderItems([card]);
           cardPopupClass.close();
