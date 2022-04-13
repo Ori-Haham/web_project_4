@@ -80,13 +80,16 @@ const profileImagePopupClass = new PopupWithForm(
       api
         .editProfileImage("/users/me/avatar", imageInput.value)
         .then(() => {
-          (profileImageError.textContent = ""), setUserImage();
+          setUserImage();
         })
         .then(() => {
           profileImagePopupClass.close();
         })
         .catch((err) => {
-          profileImageError.textContent = `Error: ${err} !`;
+          console.log(`Error: ${err} !`);
+        })
+        .finally(() => {
+          profileImagePopupClass.hideLoading();
         });
     },
   }
@@ -114,7 +117,10 @@ const profilePopupClass = new PopupWithForm(
           profilePopupClass.close();
         })
         .catch((err) => {
-          setProfileInfo(`Oops, error: ${err} !`, `Oops, error: ${err} !`);
+          console.log(`Oops, error: ${err} !`);
+        })
+        .finally(() => {
+          profilePopupClass.hideLoading();
         });
     },
   }
@@ -235,6 +241,12 @@ const cardPopupClass = new PopupWithForm(
         .then((card) => {
           cardList.renderItems([card]);
           cardPopupClass.close();
+        })
+        .catch((err) => {
+          console.log(`Error: ${err} !`);
+        })
+        .finally(() => {
+          cardPopupClass.hideLoading();
         });
     },
   }

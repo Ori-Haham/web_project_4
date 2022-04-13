@@ -30,15 +30,13 @@ export default class PopupWithForm extends Popup {
   close = () => {
     super.close();
     this._form.reset();
-    this.removeEventListeners();
-    this._hideLoading();
   };
 
   showLoading() {
     this._submitButton.textContent = this._loadingButtonText;
   }
 
-  _hideLoading = () => {
+  hideLoading = () => {
     this._submitButton.textContent = this._ButtonText;
   };
 

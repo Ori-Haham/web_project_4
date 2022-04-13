@@ -38,31 +38,28 @@ class Card {
     });
   }
 
-  _toggleUserLike() {
-    this._cardLikeButton.classList.toggle("card__like-button_active");
-  }
-
   _isLiked() {
     return this._likes.some((like) => like._id === this._userId);
   }
 
-  _highlightUserLike() {
+  _toggleUserLike() {
     this._cardLikeButton = this._element.querySelector(".card__like-button");
 
     if (this._isLiked()) {
       this._cardLikeButton.classList.add("card__like-button_active");
+    } else {
+      this._cardLikeButton.classList.remove("card__like-button_active");
     }
   }
 
   _renderLikes = () => {
     const likeCounter = this._element.querySelector(".card__likeCounte");
     likeCounter.textContent = this._likes.length;
-    this._highlightUserLike();
+    this._toggleUserLike();
   };
 
   updateLikes(likes) {
     this._likes = likes.likes;
-    this._toggleUserLike();
     this._renderLikes();
   }
 
