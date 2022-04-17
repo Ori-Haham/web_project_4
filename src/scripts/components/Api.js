@@ -14,9 +14,7 @@ export default class Api {
   getUserInfoApi(path) {
     return fetch(`${this._baseUrl}${path}`, {
       headers: { authorization: this._authorization },
-    }).then((res) => {
-      return this._getResponseData(res);
-    });
+    }).then(this._getResponseData);
   }
 
   updateUserData(path, name, about) {
@@ -30,17 +28,13 @@ export default class Api {
         name: name,
         about: about,
       }),
-    }).then((res) => {
-      return this._getResponseData(res);
-    });
+    }).then(this._getResponseData);
   }
 
   getInitialCard(path) {
     return fetch(`${this._baseUrl}${path}`, {
       headers: { authorization: this._authorization },
-    }).then((res) => {
-      return this._getResponseData(res);
-    });
+    }).then(this._getResponseData);
   }
 
   postCard(path, name, link) {
@@ -54,9 +48,7 @@ export default class Api {
         name: name,
         link: link,
       }),
-    }).then((res) => {
-      return this._getResponseData(res);
-    });
+    }).then(this._getResponseData);
   }
 
   deleteCard(cardId) {
@@ -68,41 +60,31 @@ export default class Api {
     });
   }
 
-  likeCard(method, cardId) {
+  handelLike(cardId) {
     return fetch(
       `https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`,
       {
-        method: method,
+        method: "PUT",
         headers: { authorization: this._authorization },
       }
-    );
-  }
-
-  handelLike(api, item, card) {
-    api
-      .likeCard("PUT", item._id)
-      .then((card) => {
-        return card.json();
-      })
+    )
+      .then(this._getResponseData)
       .then((card) => {
         return card;
-      })
-      .then((like) => {
-        card.updateLikes(like);
       });
   }
 
-  removeLike(api, item, card) {
-    api
-      .likeCard("DELETE", item._id)
-      .then((card) => {
-        return card.json();
-      })
+  removeLike(cardId) {
+    return fetch(
+      `https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`,
+      {
+        method: "DELETE",
+        headers: { authorization: this._authorization },
+      }
+    )
+      .then(this._getResponseData)
       .then((card) => {
         return card;
-      })
-      .then((like) => {
-        card.updateLikes(like);
       });
   }
 
@@ -116,6 +98,6 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    });
+    }).then(this._getResponseData);
   }
 }

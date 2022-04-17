@@ -34,6 +34,8 @@ import {
 import { Popup } from "../scripts/components/Popup";
 import Api from "../scripts/components/Api";
 
+let userId;
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authorizationCode: "37c0271e-6c35-4cdb-bfdd-3d6b737f9411",
@@ -52,8 +54,8 @@ const imageFormValidator = new FormValidator(
 );
 
 const userInfo = new UserInfo({
-  nameSelector: ".profile-form__name",
-  aboutMeSelector: "profile-form__about-me",
+  nameSelector: ".profile__name",
+  aboutMeSelector: ".profile__about-me",
 });
 
 function setUserImage() {
@@ -77,8 +79,8 @@ const profileImagePopupClass = new PopupWithForm(
       profileImagePopupClass.showLoading();
       api
         .editProfileImage("/users/me/avatar", imageInput.value)
-        .then(() => {
-          setUserImage();
+        .then((res) => {
+          profileImage.src = res.avatar;
           profileImagePopupClass.close();
         })
         .catch((err) => {
@@ -105,11 +107,11 @@ const profilePopupClass = new PopupWithForm(
   {
     handleFormSubmit: () => {
       profilePopupClass.showLoading();
-      userInfo.setUserInfo(nameInput.value, aboutInput.value);
       api
         .updateUserData("/users/me", nameInput.value, aboutInput.value)
         .then((res) => {
-          setProfileInfo(res.name, res.about);
+          userInfo.setUserInfo(res.name, res.about);
+          console.log(userInfo.getUserInfo());
           profilePopupClass.close();
         })
         .catch((err) => {
@@ -123,68 +125,82 @@ const profilePopupClass = new PopupWithForm(
 );
 
 function handleCardClick(evt) {
-  handleCardClick(evt);
+  popupImage.open({ src: evt.target.src, alt: evt.target.alt });
+}
+
+function deleteCardPopup(card) {
+  const deleteCardPopupClass = new Popup(
+    card.cardElement().querySelector(".deleteCardPopup")
+  );
+  return deleteCardPopupClass;
+}
+
+function handelLikee(evt, card, item) {
+  if (evt.target.classList.contains("card__like-button_active")) {
+    api
+      .removeLike(item._id)
+      .then((like) => {
+        card.updateLikes(like);
+      })
+      .catch((err) => {
+        console.log(`Oops, error: ${err} !`);
+      });
+  } else {
+    api
+      .handelLike(item._id)
+      .then((like) => {
+        card.updateLikes(like);
+      })
+      .catch((err) => {
+        console.log(`Oops, error: ${err} !`);
+      });
+  }
 }
 
 function renderCard(item) {
-  function isUserCard() {
-    if (item.owner.name === "Shaul Canlo Alvarez") {
-      const card = new UserCard(item, "#card-template", item.owner._id, {
-        handleCardClick: (evt) => {
-          handleCardClick(evt);
-        },
-        handleDeleteButtonClick: () => {
-          const deleteCardPopup = new Popup(
-            card.cardElement().querySelector(".deleteCardPopup")
-          );
-          deleteCardPopup.open();
-          const deleteCardYesButton = card
-            .cardElement()
-            .querySelector(".popup__button");
-          deleteCardYesButton.addEventListener("click", () => {
-            api
-              .deleteCard(`/cards/${item._id}`)
-              .then(() => {
-                card.removeCardFromDOM();
-              })
-              .catch((err) => {
-                console.log(`Oops, error: ${err} !`);
-              });
-          });
-        },
-        handleLike: (evt) => {
-          if (evt.target.classList.contains("card__like-button_active")) {
-            api.removeLike(api, item, card);
-          } else {
-            api.handelLike(api, item, card);
-          }
-        },
-      });
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    } else {
-      const card = new Card(
-        item,
-        "#initial-cards-template",
-        "3dcd812fefd0b46115095582",
-        {
-          handleCardClick: (evt) => {
-            handleCardClick(evt);
-          },
-          handleLike: (evt) => {
-            if (evt.target.classList.contains("card__like-button_active")) {
-              api.removeLike(api, item, card);
-            } else {
-              api.handelLike(api, item, card);
-            }
-          },
-        }
-      );
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    }
+  if (item.owner._id === userId) {
+    const card = new UserCard(item, "#card-template", item.owner._id, {
+      handleCardClick: (evt) => {
+        handleCardClick(evt);
+      },
+      handleDeleteButtonClick: () => {
+        deleteCardPopup(card).open();
+        const deleteCardYesButton = card
+          .cardElement()
+          .querySelector(".popup__button");
+        deleteCardYesButton.addEventListener("click", () => {
+          profilePopupClass.showLoading();
+          api
+            .deleteCard(`/cards/${item._id}`)
+            .then(() => {
+              card.removeCardFromDOM();
+            })
+            .catch((err) => {
+              console.log(`Oops, error: ${err} !`);
+            })
+            .finally(() => {
+              profilePopupClass.hideLoading();
+            });
+        });
+      },
+      handleLike: (evt) => {
+        handelLikee(evt, card, item);
+      },
+    });
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  } else {
+    const card = new Card(item, "#initial-cards-template", userId, {
+      handleCardClick: (evt) => {
+        handleCardClick(evt);
+      },
+      handleLike: (evt) => {
+        handelLikee(evt, card, item);
+      },
+    });
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
   }
-  isUserCard();
 }
 
 const cardList = new Section(
@@ -238,6 +254,7 @@ function handelUserInfo() {
     .getUserInfoApi("/users/me")
     .then((res) => {
       setProfileInfo(res.name, res.about);
+      userId = res._id;
     })
     .catch((err) => {
       setProfileInfo(`Oops, error: ${err} !`, `Oops, error: ${err} !`);

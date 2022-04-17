@@ -4,7 +4,8 @@ export default class PopupWithForm extends Popup {
   constructor(
     popupSelector,
     form,
-    ButtonText,
+
+    buttonText,
     loadingButtonText,
     { handleFormSubmit }
   ) {
@@ -12,7 +13,7 @@ export default class PopupWithForm extends Popup {
     this._form = document.querySelector(form);
     this._submitButton = this._form.querySelector(".popup__button");
     this._handleFormSubmit = handleFormSubmit;
-    this._ButtonText = ButtonText;
+    this._buttonText = buttonText;
     this._loadingButtonText = loadingButtonText;
   }
 
@@ -37,7 +38,7 @@ export default class PopupWithForm extends Popup {
   }
 
   hideLoading = () => {
-    this._submitButton.textContent = this._ButtonText;
+    this._submitButton.textContent = this._buttonText;
   };
 
   setEventListeners = () => {
