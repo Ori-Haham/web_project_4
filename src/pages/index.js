@@ -58,17 +58,6 @@ const userInfo = new UserInfo({
   aboutMeSelector: ".profile__about-me",
 });
 
-function setUserImage() {
-  api
-    .getUserInfoApi("/users/me")
-    .then((res) => {
-      profileImage.src = res.avatar;
-    })
-    .catch((err) => {
-      console.log(`Error: ${err} !`);
-    });
-}
-
 const profileImagePopupClass = new PopupWithForm(
   profileImagePopup,
   ".profile-image-form",
@@ -111,7 +100,6 @@ const profilePopupClass = new PopupWithForm(
         .updateUserData("/users/me", nameInput.value, aboutInput.value)
         .then((res) => {
           userInfo.setUserInfo(res.name, res.about);
-          console.log(userInfo.getUserInfo());
           profilePopupClass.close();
         })
         .catch((err) => {
@@ -135,21 +123,21 @@ function deleteCardPopup(card) {
   return deleteCardPopupClass;
 }
 
-function handelLikee(evt, card, item) {
-  if (evt.target.classList.contains("card__like-button_active")) {
+function handelLike(card, item) {
+  if (card.isLiked()) {
     api
-      .removeLike(item._id)
-      .then((like) => {
-        card.updateLikes(like);
+      .removeLike(`/cards/likes/${item._id}`)
+      .then((res) => {
+        card.updateLikes(res);
       })
       .catch((err) => {
         console.log(`Oops, error: ${err} !`);
       });
   } else {
     api
-      .handelLike(item._id)
-      .then((like) => {
-        card.updateLikes(like);
+      .addLike(`/cards/likes/${item._id}`)
+      .then((res) => {
+        card.updateLikes(res);
       })
       .catch((err) => {
         console.log(`Oops, error: ${err} !`);
@@ -160,9 +148,7 @@ function handelLikee(evt, card, item) {
 function renderCard(item) {
   if (item.owner._id === userId) {
     const card = new UserCard(item, "#card-template", item.owner._id, {
-      handleCardClick: (evt) => {
-        handleCardClick(evt);
-      },
+      handleCardClick: handleCardClick,
       handleDeleteButtonClick: () => {
         deleteCardPopup(card).open();
         const deleteCardYesButton = card
@@ -183,19 +169,17 @@ function renderCard(item) {
             });
         });
       },
-      handleLike: (evt) => {
-        handelLikee(evt, card, item);
+      handleLike: () => {
+        handelLike(card, item);
       },
     });
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   } else {
     const card = new Card(item, "#initial-cards-template", userId, {
-      handleCardClick: (evt) => {
-        handleCardClick(evt);
-      },
-      handleLike: (evt) => {
-        handelLikee(evt, card, item);
+      handleCardClick: handleCardClick,
+      handleLike: () => {
+        handelLike(card, item);
       },
     });
     const cardElement = card.generateCard();
@@ -209,16 +193,6 @@ const cardList = new Section(
   },
   cardsContainer
 );
-
-api
-  .getInitialCard("/cards")
-  .then((res) => {
-    cardsError.textContent = "";
-    cardList.renderItems(res);
-  })
-  .catch((err) => {
-    console.log(`Error: ${err} !`);
-  });
 
 const cardPopupClass = new PopupWithForm(
   cardPopup,
@@ -249,17 +223,16 @@ function setProfileInfo(name, about) {
   profileAbout.textContent = about;
 }
 
-function handelUserInfo() {
-  api
-    .getUserInfoApi("/users/me")
-    .then((res) => {
-      setProfileInfo(res.name, res.about);
-      userId = res._id;
-    })
-    .catch((err) => {
-      setProfileInfo(`Oops, error: ${err} !`, `Oops, error: ${err} !`);
-    });
-}
+Promise.all([api.getUserInfoApi("/users/me"), api.getInitialCard("/cards")])
+  .then(([user, cards]) => {
+    setProfileInfo(user.name, user.about);
+    userId = user._id;
+
+    profileImage.src = user.avatar;
+
+    cardList.renderItems(cards);
+  })
+  .catch((err) => console.log(`Oops, error: ${err} !`));
 
 function fillProfileForm() {
   nameInput.value = profileName.textContent;
@@ -286,10 +259,6 @@ function openPopupImage() {
   imageFormValidator.resetValidation();
   profileImagePopupClass.open();
 }
-
-setUserImage();
-
-handelUserInfo();
 
 profileImageOverlay.addEventListener("click", openPopupImage);
 

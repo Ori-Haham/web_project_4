@@ -38,14 +38,14 @@ class Card {
     });
   }
 
-  _isLiked() {
-    return this._likes.some((like) => like._id === this._userId);
+  isLiked() {
+    return this._likes.some((res) => res._id === this._userId);
   }
 
   _toggleUserLike() {
     this._cardLikeButton = this._element.querySelector(".card__like-button");
 
-    if (this._isLiked()) {
+    if (this.isLiked()) {
       this._cardLikeButton.classList.add("card__like-button_active");
     } else {
       this._cardLikeButton.classList.remove("card__like-button_active");
